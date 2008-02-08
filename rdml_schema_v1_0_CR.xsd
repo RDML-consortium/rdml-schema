@@ -70,22 +70,22 @@
 
   <!-- Due to the high amount of this nodes names are kept short -->
   <xs:complexType name="dp_type"><!-- dp = data point -->
-    <xs:sequence><!-- fluor = fluorescence -->
+    <xs:sequence>
       <xs:choice>
         <xs:element name="tmp" type="xs:float"/><!-- tmp = temperature -->
         <xs:element name="cyc" type="xs:float"/><!-- cyc = cycle -->
       </xs:choice>
-            <xs:element name="fluor" type="xs:float" />
-        </xs:sequence>
+      <xs:element name="fluor" type="xs:float"/><!-- fluor = fluorescence -->
+    </xs:sequence>
   </xs:complexType>  
 
   <!-- Due to the high amount of this nodes names are kept short -->
   <xs:complexType name="dye_type">
     <xs:sequence>
-            <xs:element name="dye_id" type="xs:string" minOccurs="0" />
-            <xs:element name="tar_id" type="xs:string"/><!-- tar_id = target_id -->
-      <xs:element name="cq" type="xs:float" maxOccurs="1" minOccurs="0"/><!-- qnt_cyc = quantification_cycle -->
-      <xs:element name="quantity" type="xs:float" minOccurs="0"/><!-- required for standard samples -->
+      <xs:element name="dye_id" type="xs:string" minOccurs="0"/>
+      <xs:element name="tar_id" type="xs:string"/><!-- tar_id = target_id -->
+      <xs:element name="cq" type="xs:float" minOccurs="0"/><!-- qnt_cyc = quantification_cycle -->
+      <xs:element name="quantity" type="xs:float" minOccurs="0"/><!-- required for standard samples -->
       <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/><!-- excl = exclusion -->
       <xs:element name="excl_exp" type="xs:string" minOccurs="0"/><!-- excl_exp = exclusion_explanation -->
       <xs:element name="amp_eff" type="xs:float" minOccurs="0"/><!-- amp_eff = sample_specific_amplification_efficiency -->
@@ -263,7 +263,7 @@
       <xs:element name="reverse_primer" type="oligo_type"/>
       <xs:element name="probe1" type="oligo_type" minOccurs="0"/>
       <xs:element name="probe2" type="oligo_type" minOccurs="0"/>
-      <xs:element name="amplicon_sequence" type="oligo_type"/>  
+      <xs:element name="amplicon" type="oligo_type"/>  
     </xs:sequence>
   </xs:complexType>
 
