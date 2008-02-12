@@ -1,27 +1,31 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <!-- The MIT License
+  <xs:annotation> 
+    <xs:documentation>
+      The MIT License
 
-  Copyright (c) 2008 the RDML-consortium
+      Copyright (c) 2008 the RDML-consortium
 
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
 
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
+      The above copyright notice and this permission notice shall be included in
+      all copies or substantial portions of the Software.
 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-  THE SOFTWARE. -->
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+      THE SOFTWARE.
+    </xs:documentation> 
+  </xs:annotation>
 
   <xs:complexType name="cdna_synthesis_method_type">
     <xs:sequence>
@@ -68,31 +72,37 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- Due to the high amount of this nodes names are kept short -->
-  <xs:complexType name="dp_type"><!-- dp = data point -->
+  <xs:complexType name="dp_type">
+    <xs:annotation> 
+      <xs:documentation>Due to the high amount of this nodes names are kept short
+      </xs:documentation> 
+    </xs:annotation> 
     <xs:sequence>
       <xs:choice>
-        <xs:element name="tmp" type="xs:float"/><!-- tmp = temperature -->
-        <xs:element name="cyc" type="xs:float"/><!-- cyc = cycle -->
+        <xs:element name="tmp" type="xs:float"/>
+        <xs:element name="cyc" type="xs:float"/>
       </xs:choice>
-      <xs:element name="fluor" type="xs:float"/><!-- fluor = fluorescence -->
+      <xs:element name="fluor" type="xs:float"/>
     </xs:sequence>
   </xs:complexType>  
 
-  <!-- Due to the high amount of this nodes names are kept short -->
   <xs:complexType name="dye_type">
+    <xs:annotation> 
+      <xs:documentation>Due to the high amount of this nodes names are kept short
+      </xs:documentation> 
+    </xs:annotation> 
     <xs:sequence>
       <xs:element name="dye_id" type="xs:string" minOccurs="0"/>
-      <xs:element name="tar_id" type="xs:string"/><!-- tar_id = target_id -->
-      <xs:element name="cq" type="xs:float" minOccurs="0"/><!-- qnt_cyc = quantification_cycle -->
-      <xs:element name="quantity" type="xs:float" minOccurs="0"/><!-- required for standard samples -->
-      <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/><!-- excl = exclusion -->
-      <xs:element name="excl_exp" type="xs:string" minOccurs="0"/><!-- excl_exp = exclusion_explanation -->
-      <xs:element name="amp_eff" type="xs:float" minOccurs="0"/><!-- amp_eff = sample_specific_amplification_efficiency -->
-      <xs:element name="amp_fluor" type="data_set_type" minOccurs="0"/><!-- amp_fluor = amplification_curve_fluorescence -->
-      <xs:element name="melt_fluor" type="data_set_type" minOccurs="0"/><!-- melt_fluor = melting_curve_fluorescence -->
-      <xs:element name="bg_fluor" type="xs:float" minOccurs="0"/><!-- bg_fluor = background_fluorescence -->
-      <xs:element name="quant_fluor" type="xs:float" minOccurs="0"/><!-- quant_fluor = quantification_fluorescence -->
+      <xs:element name="tar_id" type="xs:string"/>
+      <xs:element name="cq" type="xs:float" minOccurs="0"/>
+      <xs:element name="quantity" type="xs:float" minOccurs="0"/>
+      <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/>
+      <xs:element name="excl_exp" type="xs:string" minOccurs="0"/>
+      <xs:element name="amp_eff" type="xs:float" minOccurs="0"/>
+      <xs:element name="amp_fluor" type="data_set_type" minOccurs="0"/>
+      <xs:element name="melt_fluor" type="data_set_type" minOccurs="0"/>
+      <xs:element name="bg_fluor" type="xs:float" minOccurs="0"/>
+      <xs:element name="quant_fluor" type="xs:float" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -103,12 +113,6 @@
       <xs:element name="target_annotation" type="target_annotation_type" minOccurs="0"/>
       <xs:element name="sample_annotation" type="sample_annotation_type" minOccurs="0"/>
       <xs:element name="researcher" type="researcher_type" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="experiments_folder_type">
-    <xs:sequence>
-      <xs:element name="experiment" type="experiment_type" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -243,11 +247,11 @@
   
   <xs:simpleType name="sample_type_type">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="unkn"/><!-- unknown -->
-      <xs:enumeration value="ntc"/> <!-- no templtate control -->
-      <xs:enumeration value="nac"/> <!-- no amplification control -->
-      <xs:enumeration value="std"/> <!-- standard -->
-      <xs:enumeration value="opt"/> <!-- optical calibrator -->
+      <xs:enumeration value="unkn"/>
+      <xs:enumeration value="ntc"/>
+      <xs:enumeration value="nac"/>
+      <xs:enumeration value="std"/>
+      <xs:enumeration value="opt"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -350,8 +354,8 @@
 
   <xs:simpleType name="target_type_type">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="ref"/><!-- reference target -->
-      <xs:enumeration value="toi"/><!-- taget of interest -->
+      <xs:enumeration value="ref"/>
+      <xs:enumeration value="toi"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -389,13 +393,11 @@
     </xs:sequence>
   </xs:complexType>
 
-  <!-- definition of the root element -->
-
   <xs:element name="rdml">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="version" type="xs:string"/>
-        <xs:element name="experiments_folder" type="experiments_folder_type"/>
+        <xs:element name="experiment" type="experiment_type" maxOccurs="unbounded"/>
         <xs:element name="third_party_extensions" type="third_party_extensions_type" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
