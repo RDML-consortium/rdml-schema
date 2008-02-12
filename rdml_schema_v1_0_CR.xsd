@@ -112,7 +112,7 @@
       <xs:element name="annotation" type="xs:string" minOccurs="0"/>
       <xs:element name="target_annotation" type="target_annotation_type" minOccurs="0"/>
       <xs:element name="sample_annotation" type="sample_annotation_type" minOccurs="0"/>
-      <xs:element name="researcher" type="researcher_type" minOccurs="0"/>
+      <xs:element name="researcher_id" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -187,7 +187,7 @@
       <xs:element name="pcr_format" type="pcr_format_type" minOccurs="0"/>
       <xs:element name="data_collection_software" type="data_collection_software_type" minOccurs="0"/>
       <xs:element name="run_date" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="researcher" type="researcher_type" minOccurs="0"/>
+      <xs:element name="researcher_id" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType> 
 
@@ -355,6 +355,12 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="user_information_type">
+    <xs:sequence>
+      <xs:element name="researcher" type="researcher_type" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="well_type">
     <xs:sequence>
       <xs:element name="id" type="xs:string"/>
@@ -374,10 +380,39 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="version" type="xs:string"/>
+        <xs:element name="user_information" type="user_information_type" minOccurs="0"/>
         <xs:element name="experiment" type="experiment_type" maxOccurs="unbounded"/>
         <xs:element name="third_party_extensions" type="third_party_extensions_type" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
+    <xs:keyref name="exp_researcher_ID_KeyRef" refer="researcher_ID_key">
+      <xs:selector xpath="./experiment/annotation/*" />
+      <xs:field xpath="researcher_id" />
+    </xs:keyref>
+    <xs:keyref name="run_researcher_ID_KeyRef" refer="researcher_ID_key">
+      <xs:selector xpath="./experiment/run/annotation/*" />
+      <xs:field xpath="researcher_id" />
+    </xs:keyref>
+    <xs:key name="researcher_ID_key">
+      <xs:selector xpath="./user_information/researcher" />
+      <xs:field xpath="id" />
+    </xs:key>
+    <xs:keyref name="run_target_KeyRef" refer="target_key">
+      <xs:selector xpath="./experiment/run/data/well/dye/*" />
+      <xs:field xpath="tar_id" />
+    </xs:keyref>
+    <xs:key name="target_key">
+      <xs:selector xpath="./experiment/annotation/target_annotation/target" />
+      <xs:field xpath="id" />
+    </xs:key>
+    <xs:keyref name="run_sample_KeyRef" refer="sample_key">
+      <xs:selector xpath="./experiment/run/data/well/*" />
+      <xs:field xpath="sample_id" />
+    </xs:keyref>
+    <xs:key name="sample_key">
+      <xs:selector xpath="./experiment/annotation/sample_annotation/sample" />
+      <xs:field xpath="id" />
+    </xs:key>
   </xs:element>
 
 
