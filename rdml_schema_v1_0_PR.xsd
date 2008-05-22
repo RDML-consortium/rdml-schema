@@ -1,5 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.rdml.org" 
+           elementFormDefault="qualified" 
+           xmlns="http://www.rdml.org" 
+           xmlns:rdml="http://www.rdml.org"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
 
  <xs:annotation>
    <xs:documentation>
@@ -27,21 +31,21 @@
    </xs:documentation>
  </xs:annotation>
 
- <xs:complexType name="cdna_synthesis_method_type">
+ <xs:complexType name="cdnaSynthesisMethodType">
    <xs:sequence>
      <xs:element name="enzyme" type="xs:string"/>
-     <xs:element name="priming_method" type="priming_method_type"/>
+     <xs:element name="primingMethod" type="primingMethodType"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="commercial_assay_type">
+ <xs:complexType name="commercialAssayType">
    <xs:sequence>
      <xs:element name="company" type="xs:string"/>
-     <xs:element name="order_number" type="xs:string"/>
+     <xs:element name="orderNumber" type="xs:string"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="cq_detection_method_type">
+ <xs:simpleType name="cqDetectionMethodType">
    <xs:restriction base="xs:string">
      <xs:enumeration value="automated threshold and baseline settings"/>
      <xs:enumeration value="manual threshold and baseline settings"/>
@@ -49,110 +53,156 @@
    </xs:restriction>
  </xs:simpleType>
 
- <xs:complexType name="data_collection_software_type">
+ <xs:complexType name="dataCollectionSoftwareType">
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="version" type="xs:string" minOccurs="0"/>
-     <xs:element name="background_determination_method" type="xs:string" minOccurs="0"/>
-     <xs:element name="cq_detection_method" type="cq_detection_method_type" minOccurs="0"/>
-     <xs:element name="thermal_cycling_conditions_id" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0"/>
+     <xs:element name="cqDetectionMethod" type="cqDetectionMethodType" minOccurs="0"/>
+     <xs:element name="thermalCyclingConditionsId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="data_set_type">
+ <xs:complexType name="dataSetAmpCurveType">
    <xs:sequence>
-     <xs:element name="dp" type="dp_type" maxOccurs="unbounded"/>
+     <xs:element name="dp" type="dpAmpCurveType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="dnase_treatment_type">
-   <xs:restriction base="xs:string">
-     <xs:enumeration value="Y"/>
-     <xs:enumeration value="N"/>
-   </xs:restriction>
- </xs:simpleType>
+ <xs:complexType name="dataSetMeltingCurveType">
+   <xs:sequence>
+     <xs:element name="dp" type="dpMeltingCurveType" maxOccurs="unbounded"/>
+   </xs:sequence>
+ </xs:complexType>
 
- <xs:complexType name="dp_type">
+ <xs:complexType name="dataType">
    <xs:annotation>
      <xs:documentation>Due to the high amount of this nodes names are kept short
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:choice>
-       <xs:element name="tmp" type="xs:float" />
-       <xs:element name="cyc" type="xs:float" />
-     </xs:choice>
+     <xs:element name="tarId" type="xs:string"/>
+     <xs:element name="cq" type="xs:float" minOccurs="0"/>
+     <xs:element name="quantity" type="xs:float" minOccurs="0"/>
+     <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/>
+     <xs:element name="exclExp" type="xs:string" minOccurs="0"/>
+     <xs:element name="ampEff" type="xs:float" minOccurs="0"/>
+     <xs:element name="ampFluor" type="dataSetAmpCurveType" minOccurs="0"/>
+     <xs:element name="meltFluor" type="dataSetMeltingCurveType" minOccurs="0"/>
+     <xs:element name="bgFluor" type="xs:float" minOccurs="0"/>
+     <xs:element name="quantFluor" type="xs:float" minOccurs="0"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="dpAmpCurveType">
+   <xs:annotation>
+     <xs:documentation>Due to the high amount of this nodes names are kept short
+     </xs:documentation>
+   </xs:annotation>
+   <xs:sequence>
+     <xs:element name="cyc" type="xs:float" />
+     <xs:element name="tmp" type="xs:float" minOccurs="0" maxOccurs="1" />
      <xs:element name="fluor" type="xs:float"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="data_type">
+ <xs:complexType name="dpMeltingCurveType">
    <xs:annotation>
      <xs:documentation>Due to the high amount of this nodes names are kept short
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="tar_id" type="xs:string"/>
-     <xs:element name="cq" type="xs:float" minOccurs="0"/>
-     <xs:element name="quantity" type="xs:float" minOccurs="0"/>
-     <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/>
-     <xs:element name="excl_exp" type="xs:string" minOccurs="0"/>
-     <xs:element name="amp_eff" type="xs:float" minOccurs="0"/>
-     <xs:element name="amp_fluor" type="data_set_type" minOccurs="0"/>
-     <xs:element name="melt_fluor" type="data_set_type" minOccurs="0"/>
-     <xs:element name="bg_fluor" type="xs:float" minOccurs="0"/>
-     <xs:element name="quant_fluor" type="xs:float" minOccurs="0"/>
+     <xs:element name="tmp" type="xs:float" />
+     <xs:element name="fluor" type="xs:float"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="experiment_annotation_type">
-   <xs:sequence>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
-     <xs:element name="annotation" type="xs:string" minOccurs="0"/>
-     <xs:element name="target_annotation" type="target_annotation_type" minOccurs="0"/>
-     <xs:element name="sample_annotation" type="sample_annotation_type" minOccurs="0"/>
-     <xs:element name="experimenter_id" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="experiment_type">
+ <xs:complexType name="experimenterType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="date_made" type="xs:dateTime"/>
-     <xs:element name="date_updated" type="xs:dateTime"/>
-     <xs:element name="annotation" type="experiment_annotation_type" minOccurs="0"/>
-     <xs:element name="run" minOccurs="0" maxOccurs="unbounded" type="run_type"/>
+     <xs:element name="firstName" type="xs:string"/>
+     <xs:element name="lastName" type="xs:string"/>
+     <xs:element name="email" type="xs:string" minOccurs="0"/>
+     <xs:element name="labName" type="xs:string" minOccurs="0"/>
+     <xs:element name="labAddress" type="xs:string" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="oligo_type">
+ <xs:complexType name="experimentType">
    <xs:sequence>
-     <xs:element name="three_prime_tag" type="xs:string" minOccurs="0"/>
-     <xs:element name="five_prime_tag" type="xs:string" minOccurs="0"/>
-     <xs:element name="sequence" type="sequence_type" minOccurs="0"/>
+     <xs:element name="id" type="xs:string"/>
+     <xs:element name="name" type="xs:string" minOccurs="0"/>
+     <xs:element name="annotation" type="xs:string" minOccurs="0"/>
+     <xs:element name="run" minOccurs="0" maxOccurs="unbounded" type="runType"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="organism_type">
+ <xs:complexType name="gradientType">
    <xs:sequence>
-     <xs:element name="free_description" type="xs:string" minOccurs="0"/>
-     <xs:element name="official_description" type="xs:string" minOccurs="0"/>
+     <xs:element name="highTemperature" type="xs:float"/>
+     <xs:element name="lowTemperature" type="xs:float"/>
+     <xs:element name="duration" type="xs:positiveInteger"/>
+     <xs:element name="temperatureChange" type="xs:float" minOccurs="0"/>
+     <xs:element name="durationChange" type="xs:int" minOccurs="0"/>
+     <xs:element name="measure" type="measureType" minOccurs="0"/>
+     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="pcr_format_type">
+ <xs:complexType name="lidOpenType"/>
+
+ <xs:complexType name="loopType">
+   <xs:sequence>
+     <xs:element name="goto" type="xs:positiveInteger"/>
+     <xs:element name="repeat" type="xs:positiveInteger"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:simpleType name="measureType">
    <xs:restriction base="xs:string">
-     <xs:enumeration value="single-well"/>
-     <xs:enumeration value="48-well plate"/>
-     <xs:enumeration value="96-well plate"/>
-     <xs:enumeration value="384-well plate"/>
-     <xs:enumeration value="32-well rotor"/>
-     <xs:enumeration value="72-well rotor"/>
-     <xs:enumeration value="100-well rotor"/>
+     <xs:enumeration value="none"/>
+     <xs:enumeration value="real time"/>
+     <xs:enumeration value="meltcurve"/>
    </xs:restriction>
  </xs:simpleType>
 
- <xs:simpleType name="priming_method_type">
+ <xs:complexType name="oligoType">
+   <xs:sequence>
+     <xs:element name="threePrimeTag" type="xs:string" minOccurs="0"/>
+     <xs:element name="fivePrimeTag" type="xs:string" minOccurs="0"/>
+     <xs:element name="sequence" type="sequenceType" minOccurs="0"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="organismType">
+   <xs:sequence>
+     <xs:element name="freeDescription" type="xs:string" minOccurs="0"/>
+     <xs:element name="officialDescription" type="xs:string" minOccurs="0"/>
+     <xs:element name="officialSource" type="xs:string" minOccurs="0"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="pauseType">
+   <xs:sequence>
+     <xs:element name="temperature" type="xs:float"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:simpleType name="pcrFormatType">
+   <xs:restriction base="xs:string">
+     <xs:enumeration value="single-well; 1"/>
+     <xs:enumeration value="48-well plate; "/>
+     <xs:enumeration value="96-well plate; A1-H12"/>
+     <xs:enumeration value="384-well plate; A1-P24"/>
+     <xs:enumeration value="3072-well plate; A1a1-D12h8"/>
+     <xs:enumeration value="32-well rotor; 1-32"/>
+     <xs:enumeration value="72-well rotor; 1-72"/>
+     <xs:enumeration value="100-well rotor; 1-100"/>
+     <xs:enumeration value="undescribed format"/>
+   </xs:restriction>
+ </xs:simpleType>
+
+ <xs:simpleType name="primingMethodType">
    <xs:restriction base="xs:string">
      <xs:enumeration value="oligo-dt"/>
      <xs:enumeration value="random"/>
@@ -160,68 +210,49 @@
    </xs:restriction>
  </xs:simpleType>
 
- <xs:complexType name="experimenter_type">
-   <xs:sequence>
-     <xs:element name="id" type="xs:string"/>
-     <xs:element name="first_name" type="xs:string"/>
-     <xs:element name="last_name" type="xs:string"/>
-     <xs:element name="email" type="xs:string" minOccurs="0"/>
-     <xs:element name="lab_name" type="xs:string" minOccurs="0"/>
-     <xs:element name="lab_address" type="xs:string" minOccurs="0"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="rdml_id_type">
+ <xs:complexType name="rdmlIdType">
    <xs:sequence>
      <xs:element name="publisher" type="xs:string"/>
-     <xs:element name="serial_number" type="xs:string"/>
+     <xs:element name="serialNumber" type="xs:string"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="run_annotation_type">
+ <xs:complexType name="runAnnotationType">
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="instrument" type="xs:string" minOccurs="0"/>
-     <xs:element name="pcr_format" type="pcr_format_type" minOccurs="0"/>
-     <xs:element name="data_collection_software" type="data_collection_software_type" minOccurs="0"/>
-     <xs:element name="run_date" type="xs:dateTime" minOccurs="0"/>
-     <xs:element name="experimenter_id" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="pcrFormat" type="pcrFormatType" minOccurs="0"/>
+     <xs:element name="dataCollectionSoftware" type="dataCollectionSoftwareType" minOccurs="0"/>
+     <xs:element name="runDate" type="xs:dateTime" minOccurs="0"/>
+     <xs:element name="experimenterId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="run_type">
+ <xs:complexType name="runType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="date_made" type="xs:dateTime"/>
-     <xs:element name="date_updated" type="xs:dateTime"/>
-     <xs:element name="annotation" type="run_annotation_type" minOccurs="0"/>
-     <xs:element name="well" type="well_type" maxOccurs="unbounded" minOccurs="0"/>
+     <xs:element name="annotation" type="runAnnotationType" minOccurs="0"/>
+     <xs:element name="well" type="wellType" maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="sample_annotation_type">
-   <xs:sequence>
-     <xs:element maxOccurs="unbounded" name="sample_id"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="sample_type">
+ <xs:complexType name="sampleType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="type" type="sample_type_type" default="unkn"/>
-     <xs:element name="inter_run_calibrator" type="xs:boolean" default="false" minOccurs="0"/>
-     <xs:element name="calibrator_sample" type="xs:boolean" default="false" minOccurs="0"/>
+     <xs:element name="type" type="sampleTypeType" default="unkn"/>
+     <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0"/>
+     <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="template_isolation_method" type="xs:string" minOccurs="0"/>
-     <xs:element name="dnase_treatment" type="dnase_treatment_type" minOccurs="0"/>
-     <xs:element name="cdna_synthesis_method" type="cdna_synthesis_method_type" minOccurs="0"/>
-     <xs:element name="template_quantity" type="xs:double" minOccurs="0"/>
-     <xs:element name="template_quality" type="template_quality_type" minOccurs="0"/>
+     <xs:element name="templateIsolationMethod" type="xs:string" minOccurs="0"/>
+     <xs:element name="dnaseTreatment" type="xs:boolean" minOccurs="0"/>
+     <xs:element name="cdnaSynthesisMethod" type="cdnaSynthesisMethodType" minOccurs="0"/>
+     <xs:element name="templateQuantity" type="xs:double" minOccurs="0"/>
+     <xs:element name="templateQuality" type="templateQualityType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="sample_type_type">
+ <xs:simpleType name="sampleTypeType">
    <xs:restriction base="xs:string">
      <xs:enumeration value="unkn"/>
      <xs:enumeration value="ntc"/>
@@ -231,164 +262,123 @@
    </xs:restriction>
  </xs:simpleType>
 
- <xs:simpleType name="sequence_type">
+ <xs:simpleType name="sequenceType">
    <xs:restriction base="xs:string">
      <xs:pattern value="([a-zA-Z]+)"/>
    </xs:restriction>
  </xs:simpleType>
 
- <xs:complexType name="sequences_type">
+ <xs:complexType name="sequencesType">
    <xs:sequence>
-     <xs:element name="forward_primer" type="oligo_type"/>
-     <xs:element name="reverse_primer" type="oligo_type"/>
-     <xs:element name="probe1" type="oligo_type" minOccurs="0"/>
-     <xs:element name="probe2" type="oligo_type" minOccurs="0"/>
-     <xs:element name="amplicon" type="oligo_type"/>
+     <xs:element name="forwardPrimer" type="oligoType"/>
+     <xs:element name="reversePrimer" type="oligoType"/>
+     <xs:element name="probe1" type="oligoType" minOccurs="0"/>
+     <xs:element name="probe2" type="oligoType" minOccurs="0"/>
+     <xs:element name="amplicon" type="oligoType"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="step_gradient_type">
-   <xs:sequence>
-     <xs:element name="high_temperature" type="xs:float"/>
-     <xs:element name="low_temperature" type="xs:float"/>
-     <xs:element name="duration" type="xs:positiveInteger"/>
-     <xs:element name="temperature_change" type="xs:float" minOccurs="0"/>
-     <xs:element name="duration_change" type="xs:int" minOccurs="0"/>
-     <xs:element name="measure" type="step_measure_type" minOccurs="0"/>
-     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="step_lid_open_type"/>
-
- <xs:complexType name="step_loop_type">
-   <xs:sequence>
-     <xs:element name="goto_step" type="xs:positiveInteger"/>
-     <xs:element name="repeat_loop" type="xs:positiveInteger"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:simpleType name="step_measure_type">
-   <xs:restriction base="xs:string">
-     <xs:enumeration value="none"/>
-     <xs:enumeration value="real time"/>
-     <xs:enumeration value="meltcurve"/>
-   </xs:restriction>
- </xs:simpleType>
-
- <xs:complexType name="step_temperature_type">
-   <xs:sequence>
-     <xs:element name="temperature" type="xs:float"/>
-     <xs:element name="duration" type="xs:positiveInteger"/>
-     <xs:element name="temperature_change" type="xs:float" minOccurs="0"/>
-     <xs:element name="duration_change" type="xs:int" minOccurs="0"/>
-     <xs:element name="measure" type="step_measure_type" minOccurs="0"/>
-     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="step_type">
+ <xs:complexType name="stepType">
    <xs:sequence>
      <xs:element name="nr" type="xs:positiveInteger"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:choice>
-       <xs:element name="step_temperature" type="step_temperature_type"/>
-       <xs:element name="step_gradient" type="step_gradient_type"/>
-       <xs:element name="step_loop" type="step_loop_type"/>
-       <xs:element name="step_lid_open" type="step_lid_open_type"/>
-       <xs:element name="step_pause" type="step_pause_type"/>
+       <xs:element name="temperature" type="temperatureType"/>
+       <xs:element name="gradient" type="gradientType"/>
+       <xs:element name="loop" type="loopType"/>
+       <xs:element name="pause" type="pauseType"/>
+       <xs:element name="lidOpen" type="lidOpenType"/>
      </xs:choice>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="step_pause_type">
+ <xs:complexType name="targetInformationType">
    <xs:sequence>
-     <xs:element name="temperature" type="xs:float"/>
+     <xs:element name="target" type="targetType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="target_annotation_type">
-   <xs:sequence>
-     <xs:element maxOccurs="unbounded" name="target_id"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="target_type">
+ <xs:complexType name="targetType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="type" type="target_type_type"/>
-     <xs:element name="organism" type="organism_type" minOccurs="0"/>
-     <xs:element name="x_ref" type="x_ref_type" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="amplification_efficiency" type="xs:float" minOccurs="0"/>
-     <xs:element name="dye_id" type="xs:string" minOccurs="0"/>
-     <xs:element name="sequences" type="sequences_type" minOccurs="0"/>
-     <xs:element name="commercial_assay" type="commercial_assay_type" minOccurs="0"/>
-     <xs:element name="rt_primer_db_id" type="xs:string" minOccurs="0"/>
+     <xs:element name="type" type="targetTypeType"/>
+     <xs:element name="organism" type="organismType" minOccurs="0"/>
+     <xs:element name="xRef" type="xRefType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0"/>
+     <xs:element name="dyeId" type="xs:string" minOccurs="0"/>
+     <xs:element name="sequences" type="sequencesType" minOccurs="0"/>
+     <xs:element name="commercialAssay" type="commercialAssayType" minOccurs="0"/>
+     <xs:element name="rtPrimerDbId" type="xs:string" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="target_type_type">
+ <xs:simpleType name="targetTypeType">
    <xs:restriction base="xs:string">
      <xs:enumeration value="ref"/>
      <xs:enumeration value="toi"/>
    </xs:restriction>
  </xs:simpleType>
 
- <xs:complexType name="template_quality_type">
+ <xs:complexType name="temperatureType">
+   <xs:sequence>
+     <xs:element name="temperature" type="xs:float"/>
+     <xs:element name="duration" type="xs:positiveInteger"/>
+     <xs:element name="temperatureChange" type="xs:float" minOccurs="0"/>
+     <xs:element name="durationChange" type="xs:int" minOccurs="0"/>
+     <xs:element name="measure" type="measureType" minOccurs="0"/>
+     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="templateQualityType">
    <xs:sequence>
      <xs:element name="method" type="xs:string"/>
      <xs:element name="result" type="xs:float"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="third_party_extensions_type">
+ <xs:complexType name="thirdPartyExtensionsType">
    <xs:sequence>
      <xs:any maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="user_information_type">
+ <xs:complexType name="thermalCyclingConditionsInformationType">
    <xs:sequence>
-     <xs:element name="experimenter" type="experimenter_type" maxOccurs="unbounded"/>
+     <xs:element name="thermalCyclingCondition" type="thermalCyclingConditionType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="target_information_type">
-   <xs:sequence>
-     <xs:element name="target" type="target_type" maxOccurs="unbounded"/>
-   </xs:sequence>
- </xs:complexType>
-
- <xs:complexType name="thermal_cycling_condition_type">
+ <xs:complexType name="thermalCyclingConditionType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
-     <xs:element name="lid_temperature" type="xs:float" minOccurs="0"/>
-     <xs:element name="step" type="step_type" maxOccurs="unbounded" />
+     <xs:element name="lidTemperature" type="xs:float" minOccurs="0"/>
+     <xs:element name="step" type="stepType" maxOccurs="unbounded" />
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="thermal_cycling_conditions_information_type">
+ <xs:complexType name="userInformationType">
    <xs:sequence>
-     <xs:element name="thermal_cycling_condition" type="thermal_cycling_condition_type" maxOccurs="unbounded"/>
+     <xs:element name="experimenter" type="experimenterType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="sample_information_type">
+ <xs:complexType name="sampleInformationType">
    <xs:sequence>
-     <xs:element name="sample" type="sample_type" maxOccurs="unbounded"/>
+     <xs:element name="sample" type="sampleType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="well_type">
+ <xs:complexType name="wellType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="sample_id" type="xs:string"/>
-     <xs:element name="data" type="data_type" maxOccurs="unbounded"/>
+     <xs:element name="sampleId" type="xs:string"/>
+     <xs:element name="data" type="dataType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="x_ref_type">
+ <xs:complexType name="xRefType">
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="id" type="xs:string" minOccurs="0"/>
@@ -398,61 +388,49 @@
  <xs:element name="rdml">
    <xs:complexType>
      <xs:sequence>
+       <xs:element name="dateMade" type="xs:dateTime" minOccurs="0"/>
+       <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0"/>
        <xs:element name="version" type="xs:string"/>
-       <xs:element name="id" type="rdml_id_type" minOccurs="0" maxOccurs="unbounded"/>
-       <xs:element name="user_information" type="user_information_type" minOccurs="0"/>
-       <xs:element name="sample_information" type="sample_information_type" minOccurs="0"/>
-       <xs:element name="target_information" type="target_information_type" minOccurs="0"/>
-       <xs:element name="thermal_cycling_conditions_information" type="thermal_cycling_conditions_information_type" minOccurs="0"/>
-       <xs:element name="experiment" type="experiment_type" minOccurs="0" maxOccurs="unbounded"/>
-       <xs:element name="third_party_extensions" type="third_party_extensions_type" minOccurs="0"/>
+       <xs:element name="id" type="rdmlIdType" minOccurs="0" maxOccurs="unbounded"/>
+       <xs:element name="userInformation" type="userInformationType" minOccurs="0"/>
+       <xs:element name="sampleInformation" type="sampleInformationType" minOccurs="0"/>
+       <xs:element name="targetInformation" type="targetInformationType" minOccurs="0"/>
+       <xs:element name="thermalCyclingConditionsInformation" type="thermalCyclingConditionsInformationType" minOccurs="0"/>
+       <xs:element name="experiment" type="experimentType" minOccurs="0" maxOccurs="unbounded"/>
+       <xs:element name="thirdPartyExtensions" type="thirdPartyExtensionsType" minOccurs="0"/>
      </xs:sequence>
    </xs:complexType>
-   <xs:keyref name="exp_experimenter_ID_KeyRef" refer="experimenter_ID_key">
-     <xs:selector xpath="./experiment/annotation/*" />
-     <xs:field xpath="experimenter_id" />
-   </xs:keyref>
-   <xs:keyref name="run_experimenter_ID_KeyRef" refer="experimenter_ID_key">
+   <xs:keyref name="ExperimenterIdKeyRef" refer="experimenterIdKey">
      <xs:selector xpath="./experiment/run/annotation/*" />
-     <xs:field xpath="experimenter_id" />
+     <xs:field xpath="experimenterId" />
    </xs:keyref>
-   <xs:key name="experimenter_ID_key">
-     <xs:selector xpath="./user_information/experimenter" />
+   <xs:key name="experimenterIdKey">
+     <xs:selector xpath="./userInformation/experimenter" />
      <xs:field xpath="id" />
    </xs:key>
-   <xs:keyref name="run_target_KeyRef" refer="target_key">
-     <xs:selector xpath="./experiment/run/data/well/dye/*" />
-     <xs:field xpath="tar_id" />
+   <xs:keyref name="TargetIdKeyRef" refer="targetIdKey">
+     <xs:selector xpath="./experiment/run/well/data/*" />
+     <xs:field xpath="tarId" />
    </xs:keyref>
-   <xs:keyref name="experiment_target_KeyRef" refer="target_key">
-     <xs:selector xpath="./experiment/annotation/target_annotation/*" />
-     <xs:field xpath="target_id" />
-   </xs:keyref>
-   <xs:key name="target_key">
-     <xs:selector xpath="./target_information/target" />
+   <xs:key name="targetIdKey">
+     <xs:selector xpath="./targetInformation/target" />
      <xs:field xpath="id" />
    </xs:key>
-   <xs:keyref name="run_sample_KeyRef" refer="sample_key">
-     <xs:selector xpath="./experiment/run/data/well/*" />
-     <xs:field xpath="sample_id" />
+   <xs:keyref name="SampleIdKeyRef" refer="sampleIdKey">
+     <xs:selector xpath="./experiment/run/well/data/*" />
+     <xs:field xpath="sampleId" />
    </xs:keyref>
-   <xs:keyref name="experiment_sample_KeyRef" refer="sample_key">
-     <xs:selector xpath="./experiment/annotation/sample_annotation/*" />
-     <xs:field xpath="sample_id" />
-   </xs:keyref>
-   <xs:key name="sample_key">
-     <xs:selector xpath="./sample_information/sample" />
+   <xs:key name="sampleIdKey">
+     <xs:selector xpath="./sampleInformation/sample" />
      <xs:field xpath="id" />
    </xs:key>
-   <xs:keyref name="thermal_cycling_conditions_KeyRef" refer="thermal_cycling_conditions_key">
-     <xs:selector xpath="./experiment/run/annotation/data_collection_software/*"/>
-     <xs:field xpath="thermal_cycling_conditions_id"/>
+   <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="thermalCyclingConditionsIdKey">
+     <xs:selector xpath="./experiment/run/annotation/dataCollectionSoftware/*"/>
+     <xs:field xpath="thermalCyclingConditionsId"/>
    </xs:keyref>
-   <xs:key name="thermal_cycling_conditions_key">
-     <xs:selector xpath="./thermal_cycling_conditions_information/thermal_cycling_conditions"/>
+   <xs:key name="thermalCyclingConditionsIdKey">
+     <xs:selector xpath="./thermalCyclingConditionsInformation/thermalCyclingConditions"/>
      <xs:field xpath="id"/>
    </xs:key>
  </xs:element>
-
-
 </xs:schema>
