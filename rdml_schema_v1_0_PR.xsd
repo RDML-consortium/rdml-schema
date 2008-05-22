@@ -191,7 +191,7 @@
  <xs:simpleType name="pcrFormatType">
    <xs:restriction base="xs:string">
      <xs:enumeration value="single-well; 1"/>
-     <xs:enumeration value="48-well plate; "/>
+     <xs:enumeration value="48-well plate; A1-F8"/>
      <xs:enumeration value="96-well plate; A1-H12"/>
      <xs:enumeration value="384-well plate; A1-P24"/>
      <xs:enumeration value="3072-well plate; A1a1-D12h8"/>
