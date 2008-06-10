@@ -354,7 +354,7 @@
      <xs:sequence>
        <xs:element name="dateMade" type="xs:dateTime" minOccurs="0"/>
        <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0"/>
-       <xs:element name="version" type="xs:string"/>
+       <xs:element name="version" type="xs:string" fixed="1.0"/>
        <xs:element name="id" type="rdmlIdType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experimenter" type="experimenterType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="sample" type="sampleType" maxOccurs="unbounded" minOccurs="0"/>
