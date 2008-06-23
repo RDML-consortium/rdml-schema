@@ -330,6 +330,7 @@
      <xs:element name="id" type="xs:string"/>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0"/>
+     <xs:element name="experimenterId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="step" type="stepType" maxOccurs="unbounded" />
    </xs:sequence>
  </xs:complexType>
@@ -364,37 +365,42 @@
        <xs:element name="thirdPartyExtensions" type="thirdPartyExtensionsType" minOccurs="0"/>
      </xs:sequence>
    </xs:complexType>
+   
    <xs:keyref name="experimenterIdKeyRef" refer="experimenterIdKey">
-     <xs:selector xpath="./experiment/run/annotation/*" />
-     <xs:field xpath="experimenterId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation/*" />
+     <xs:field xpath="rdml:experimenterId" />
+   </xs:keyref>
+   <xs:keyref name="experimenterIdKeyRef2" refer="experimenterIdKey">
+     <xs:selector xpath="./rdml:thermalCyclingCondition/*" />
+     <xs:field xpath="rdml:experimenterId" />
    </xs:keyref>
    <xs:key name="experimenterIdKey">
-     <xs:selector xpath="./experimenter" />
-     <xs:field xpath="id" />
+     <xs:selector xpath="./rdml:experimenter" />
+     <xs:field xpath="rdml:id" />
    </xs:key>
    <xs:keyref name="targetIdKeyRef" refer="targetIdKey">
-     <xs:selector xpath="./experiment/run/well/data/*" />
-     <xs:field xpath="tarId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:well/rdml:data/*" />
+     <xs:field xpath="rdml:tarId" />
    </xs:keyref>
    <xs:key name="targetIdKey">
-     <xs:selector xpath="./target" />
-     <xs:field xpath="id" />
+     <xs:selector xpath="./rdml:target" />
+     <xs:field xpath="rdml:id" />
    </xs:key>
    <xs:keyref name="sampleIdKeyRef" refer="sampleIdKey">
-     <xs:selector xpath="./experiment/run/well/data/*" />
-     <xs:field xpath="sampleId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:well/rdml:data/*" />
+     <xs:field xpath="rdml:sampleId" />
    </xs:keyref>
    <xs:key name="sampleIdKey">
-     <xs:selector xpath="./sample" />
-     <xs:field xpath="id" />
+     <xs:selector xpath="./rdml:sample" />
+     <xs:field xpath="rdml:id" />
    </xs:key>
    <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="thermalCyclingConditionsIdKey">
-     <xs:selector xpath="./experiment/run/annotation/dataCollectionSoftware/*"/>
-     <xs:field xpath="thermalCyclingConditionsId"/>
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation/rdml:dataCollectionSoftware/*" />
+     <xs:field xpath="rdml:thermalCyclingConditionsId" />
    </xs:keyref>
    <xs:key name="thermalCyclingConditionsIdKey">
-     <xs:selector xpath="./thermalCyclingConditions"/>
-     <xs:field xpath="id"/>
+     <xs:selector xpath="./rdml:thermalCyclingCondition" />
+     <xs:field xpath="rdml:id" />
    </xs:key>
- </xs:element>
+   </xs:element>
 </xs:schema>
