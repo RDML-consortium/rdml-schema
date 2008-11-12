@@ -1,0 +1,15 @@
+Changes in revision 36:
+
+- sequenceType: string has now IUPAC case matching 
+
+- targetType: also has a description string now
+
+- oligoType: The sequence is not optional any more
+- sequencesType: Forward primer, reverse primer and amplicon are optional
+  This allows to specify any combination of primers and amplicons.
+  
+- experimentType: name element renamed to description.
+
+- thermalCyclingConditionType: name element renamed to description.
+
+Last revision 35 was from 23/6/08

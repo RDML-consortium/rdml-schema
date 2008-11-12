@@ -119,7 +119,7 @@
  <xs:complexType name="experimentType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
+     <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="annotation" type="xs:string" minOccurs="0"/>
      <xs:element name="run" minOccurs="0" maxOccurs="unbounded" type="runType"/>
    </xs:sequence>
@@ -158,7 +158,7 @@
    <xs:sequence>
      <xs:element name="threePrimeTag" type="xs:string" minOccurs="0"/>
      <xs:element name="fivePrimeTag" type="xs:string" minOccurs="0"/>
-     <xs:element name="sequence" type="sequenceType" minOccurs="0"/>
+     <xs:element name="sequence" type="sequenceType"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -252,17 +252,39 @@
 
  <xs:simpleType name="sequenceType">
    <xs:restriction base="xs:string">
-     <xs:pattern value="([a-zA-Z]+)"/>
+     <xs:pattern value="([a|c|g|t|r|y|s|w|k|m|b|d|h|v|n|A|C|G|T|R|Y|S|W|K|M|B|D|H|V|N]+)">
+       <xs:annotation>
+         <xs:documentation>
+           All the IUPAC codes :
+
+           A         Adenine
+           C         Cytosine
+           G         Guanine
+           T (or U)  Thymine (or Uracil)
+           R         A or G
+           Y         C or T
+           S         G or C
+           W         A or T
+           K         G or T
+           M         A or C
+           B         C or G or T
+           D         A or G or T
+           H         A or C or T
+           V         A or C or G
+           N         any base
+         </xs:documentation>
+       </xs:annotation>
+     </xs:pattern>
    </xs:restriction>
  </xs:simpleType>
 
  <xs:complexType name="sequencesType">
    <xs:sequence>
-     <xs:element name="forwardPrimer" type="oligoType"/>
-     <xs:element name="reversePrimer" type="oligoType"/>
+     <xs:element name="forwardPrimer" type="oligoType" minOccurs="0"/>
+     <xs:element name="reversePrimer" type="oligoType" minOccurs="0"/>
      <xs:element name="probe1" type="oligoType" minOccurs="0"/>
      <xs:element name="probe2" type="oligoType" minOccurs="0"/>
-     <xs:element name="amplicon" type="oligoType"/>
+     <xs:element name="amplicon" type="oligoType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -284,6 +306,7 @@
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
      <xs:element name="type" type="targetTypeType"/>
+     <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="organism" type="organismType" minOccurs="0"/>
      <xs:element name="xRef" type="xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0"/>
@@ -319,19 +342,19 @@
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="thirdPartyExtensionsType">
-   <xs:sequence>
-     <xs:any maxOccurs="unbounded" minOccurs="0"/>
-   </xs:sequence>
- </xs:complexType>
-
  <xs:complexType name="thermalCyclingConditionType">
    <xs:sequence>
      <xs:element name="id" type="xs:string"/>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
+     <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0"/>
      <xs:element name="experimenterId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="step" type="stepType" maxOccurs="unbounded" />
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="thirdPartyExtensionsType">
+   <xs:sequence>
+     <xs:any maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
