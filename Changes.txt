@@ -1,3 +1,12 @@
+Changes in revision 37:
+
+- added rdml: namespace everywere
+
+- fixed error of sampleIdKeyRef
+
+- fixed errors of keyRef
+
+
 Changes in revision 36:
 
 - sequenceType: string has now IUPAC case matching 
