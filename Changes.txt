@@ -1,6 +1,22 @@
+Changes in revision 38:
+
+- all IDs have to be at least 1 letter long (Thanks Daniel!)
+
+- changed order in sampleType to have description and documentation following ID
+
+- changed order in targetType to have description and documentation following ID
+
+- added documentationID in targetType, experimentType, sampleType,
+  thermalCyclingConditionType to link to one or unlimited documentationType.
+
+- added documentationType in rdml (similar to samples and targets)
+
+- rdmlIdType: added optional element MD5hash
+
+
 Changes in revision 37:
 
-- added rdml: namespace everywere
+- added rdml: namespace everywhere
 
 - fixed error of sampleIdKeyRef
 
