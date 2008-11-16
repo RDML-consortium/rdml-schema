@@ -1,3 +1,20 @@
+Changes in revision 40:
+
+- samples also have a xRef now.
+
+- changed order: in teargetType xRef moved behind documentation. 
+
+- all elements in cdnaSynthesisMethodType are optional for increased flexibility.
+
+- dnaseTreatment was moved from sample to cdnaSynthesisMethodType because a 
+  DNAse treatment makes only sense in a cDNA synthesis context.
+
+- in dataCollectionSoftwareType thermalCyclingConditionsId can occur only once.
+
+- cdnaSynthesisMethodType has a thermalCyclingConditionsId for cDNA synthesis.
+
+- added an documentationID in annotationType 
+
 Changes in revision 38:
 
 - all IDs have to be at least 1 letter long (Thanks Daniel!)

@@ -32,8 +32,10 @@
 
  <xs:complexType name="cdnaSynthesisMethodType">
    <xs:sequence>
-     <xs:element name="enzyme" type="xs:string"/>
-     <xs:element name="primingMethod" type="rdml:primingMethodType"/>
+     <xs:element name="enzyme" type="xs:string" minOccurs="0"/>
+     <xs:element name="primingMethod" type="rdml:primingMethodType" minOccurs="0"/>
+     <xs:element name="dnaseTreatment" type="xs:boolean" minOccurs="0"/>
+     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -58,7 +60,7 @@
      <xs:element name="version" type="xs:string" minOccurs="0"/>
      <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0"/>
      <xs:element name="cqDetectionMethod" type="rdml:cqDetectionMethodType" minOccurs="0"/>
-     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -223,6 +225,7 @@
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
+     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="instrument" type="xs:string" minOccurs="0"/>
      <xs:element name="pcrFormat" type="rdml:pcrFormatType" minOccurs="0"/>
      <xs:element name="dataCollectionSoftware" type="rdml:dataCollectionSoftwareType" minOccurs="0"/>
@@ -244,11 +247,11 @@
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:sampleTypeType" default="unkn"/>
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0"/>
      <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0"/>
      <xs:element name="templateIsolationMethod" type="xs:string" minOccurs="0"/>
-     <xs:element name="dnaseTreatment" type="xs:boolean" minOccurs="0"/>
      <xs:element name="cdnaSynthesisMethod" type="rdml:cdnaSynthesisMethodType" minOccurs="0"/>
      <xs:element name="templateQuantity" type="xs:double" minOccurs="0"/>
      <xs:element name="templateQuality" type="rdml:templateQualityType" minOccurs="0"/>
@@ -322,9 +325,9 @@
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
      <xs:element name="organism" type="rdml:organismType" minOccurs="0"/>
-     <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0"/>
      <xs:element name="dyeId" type="xs:string" minOccurs="0"/>
      <xs:element name="sequences" type="rdml:sequencesType" minOccurs="0"/>
@@ -436,6 +439,10 @@
      <xs:selector xpath="./rdml:experiment" />
      <xs:field xpath="rdml:documentationId" />
    </xs:keyref>
+   <xs:keyref name="documentationIdKeyRef5" refer="rdml:documentationIdKey">
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation" />
+     <xs:field xpath="rdml:documentationId" />
+   </xs:keyref>
    <xs:key name="documentationIdKey">
      <xs:selector xpath="./rdml:documentation" />
      <xs:field xpath="rdml:id" />
@@ -461,6 +468,10 @@
 	 
    <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="rdml:thermalCyclingConditionsIdKey">
      <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation/rdml:dataCollectionSoftware" />
+     <xs:field xpath="rdml:thermalCyclingConditionsId" />
+   </xs:keyref>
+   <xs:keyref name="thermalCyclingConditionsIdKeyRef2" refer="rdml:thermalCyclingConditionsIdKey">
+     <xs:selector xpath="./rdml:sample/rdml:cdnaSynthesisMethod" />
      <xs:field xpath="rdml:thermalCyclingConditionsId" />
    </xs:keyref>
    <xs:key name="thermalCyclingConditionsIdKey">
