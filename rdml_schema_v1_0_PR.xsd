@@ -51,6 +51,7 @@
      <xs:enumeration value="automated threshold and baseline settings"/>
      <xs:enumeration value="manual threshold and baseline settings"/>
      <xs:enumeration value="second derivative maximum"/>
+     <xs:enumeration value="other"/>
    </xs:restriction>
  </xs:simpleType>
 
@@ -210,6 +211,7 @@
      <xs:enumeration value="oligo-dt"/>
      <xs:enumeration value="random"/>
      <xs:enumeration value="target-specific"/>
+     <xs:enumeration value="oligo-dt and random"/>
    </xs:restriction>
  </xs:simpleType>
 
@@ -253,8 +255,10 @@
      <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0"/>
      <xs:element name="templateIsolationMethod" type="xs:string" minOccurs="0"/>
      <xs:element name="cdnaSynthesisMethod" type="rdml:cdnaSynthesisMethodType" minOccurs="0"/>
-     <xs:element name="templateQuantity" type="xs:double" minOccurs="0"/>
-     <xs:element name="templateQuality" type="rdml:templateQualityType" minOccurs="0"/>
+     <xs:element name="templateRNAQuantity" type="xs:double" minOccurs="0"/>
+     <xs:element name="templateRNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
+     <xs:element name="templateDNAQuantity" type="xs:double" minOccurs="0"/>
+     <xs:element name="templateDNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 

@@ -1,3 +1,13 @@
+Changes in revision 41:
+
+- cqDetectionMethod has additional type "other" (Jans tip)
+
+- primingMethod has additional type "oligo-dt and random" (Jans tip)
+
+- in sample templateQuantity and templateQuality were split up in 
+  two fields, one for RNA the other for DNA.  (Jans tip)
+
+
 Changes in revision 40:
 
 - samples also have a xRef now.
