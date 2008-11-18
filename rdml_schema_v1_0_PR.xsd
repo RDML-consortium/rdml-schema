@@ -59,9 +59,6 @@
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="version" type="xs:string" minOccurs="0"/>
-     <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0"/>
-     <xs:element name="cqDetectionMethod" type="rdml:cqDetectionMethodType" minOccurs="0"/>
-     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -130,7 +127,6 @@
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="annotation" type="xs:string" minOccurs="0"/>
      <xs:element name="run" type="rdml:runType" minOccurs="0" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
@@ -178,14 +174,6 @@
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="organismType">
-   <xs:sequence>
-     <xs:element name="freeDescription" type="xs:string" minOccurs="0"/>
-     <xs:element name="officialDescription" type="xs:string" minOccurs="0"/>
-     <xs:element name="officialSource" type="xs:string" minOccurs="0"/>
-   </xs:sequence>
- </xs:complexType>
-
  <xs:complexType name="pauseType">
    <xs:sequence>
      <xs:element name="temperature" type="xs:float"/>
@@ -223,23 +211,19 @@
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="runAnnotationType">
-   <xs:sequence>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
-     <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="instrument" type="xs:string" minOccurs="0"/>
-     <xs:element name="pcrFormat" type="rdml:pcrFormatType" minOccurs="0"/>
-     <xs:element name="dataCollectionSoftware" type="rdml:dataCollectionSoftwareType" minOccurs="0"/>
-     <xs:element name="runDate" type="xs:dateTime" minOccurs="0"/>
-     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-   </xs:sequence>
- </xs:complexType>
-
  <xs:complexType name="runType">
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
-     <xs:element name="annotation" type="rdml:runAnnotationType" minOccurs="0"/>
+     <xs:element name="description" type="xs:string" minOccurs="0"/>
+     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="instrument" type="xs:string" minOccurs="0"/>
+     <xs:element name="dataCollectionSoftware" type="rdml:dataCollectionSoftwareType" minOccurs="0"/>
+     <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0"/>
+     <xs:element name="cqDetectionMethod" type="rdml:cqDetectionMethodType" minOccurs="0"/>
+     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
+     <xs:element name="pcrFormat" type="rdml:pcrFormatType" minOccurs="0"/>
+     <xs:element name="runDate" type="xs:dateTime" minOccurs="0"/>
      <xs:element name="well" type="rdml:wellType" maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
@@ -331,12 +315,10 @@
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
-     <xs:element name="organism" type="rdml:organismType" minOccurs="0"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0"/>
      <xs:element name="dyeId" type="xs:string" minOccurs="0"/>
      <xs:element name="sequences" type="rdml:sequencesType" minOccurs="0"/>
      <xs:element name="commercialAssay" type="rdml:commercialAssayType" minOccurs="0"/>
-     <xs:element name="rtPrimerDbId" type="xs:string" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -415,7 +397,7 @@
    </xs:complexType>
    
    <xs:keyref name="experimenterIdKeyRef" refer="rdml:experimenterIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation" />
+     <xs:selector xpath="./rdml:experiment/rdml:run" />
      <xs:field xpath="rdml:experimenterId" />
    </xs:keyref>
    <xs:keyref name="experimenterIdKeyRef2" refer="rdml:experimenterIdKey">
@@ -444,7 +426,7 @@
      <xs:field xpath="rdml:documentationId" />
    </xs:keyref>
    <xs:keyref name="documentationIdKeyRef5" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation" />
+     <xs:selector xpath="./rdml:experiment/rdml:run" />
      <xs:field xpath="rdml:documentationId" />
    </xs:keyref>
    <xs:key name="documentationIdKey">
@@ -471,7 +453,7 @@
    </xs:key>
 	 
    <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="rdml:thermalCyclingConditionsIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:annotation/rdml:dataCollectionSoftware" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:dataCollectionSoftware" />
      <xs:field xpath="rdml:thermalCyclingConditionsId" />
    </xs:keyref>
    <xs:keyref name="thermalCyclingConditionsIdKeyRef2" refer="rdml:thermalCyclingConditionsIdKey">

@@ -1,3 +1,17 @@
+Changes in revision 42:
+
+- organism in target removed
+
+- rtPrimerDbId in target removed
+
+- annotation in experiment removed
+
+- Annotation in run removed, subelements are now in run
+
+- backgroundDeterminationMethod, cqDetectionMethod and 
+  thermalCyclingConditionsId are now in run
+
+
 Changes in revision 41:
 
 - cqDetectionMethod has additional type "other" (Jans tip)
