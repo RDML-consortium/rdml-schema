@@ -33,7 +33,7 @@
  <xs:complexType name="cdnaSynthesisMethodType">
    <xs:annotation>
      <xs:documentation>
-       Describtion of the cDNA synthesis method.
+       Description of the cDNA synthesis method.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -59,8 +59,8 @@
  <xs:complexType name="commercialAssayType">
    <xs:annotation>
      <xs:documentation>
-       For some comercial assays the primer sequences may be unknown. This element 
-       allows to describe comercial assays.
+       For some commercial assays the primer sequences may be unknown. This element 
+       allows to describe commercial assays.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -112,7 +112,7 @@
      <xs:element name="cq" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Quantification cycle - The calculated fractional cycle were 
+           Quantification cycle - The calculated fractional cycle where 
            amplification was detected.
          </xs:documentation>
        </xs:annotation>
@@ -180,7 +180,7 @@
  <xs:complexType name="documentationType">
    <xs:annotation>
      <xs:documentation>
-       This elements should be used if the same description applies to many samples, 
+       These elements should be used if the same description applies to many samples, 
        targets or experiments.
      </xs:documentation>
    </xs:annotation>
@@ -193,7 +193,7 @@
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the high amount of this elements names are kept short.
+       Due to the high amount of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -207,7 +207,7 @@
      <xs:element name="tmp" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Temperature - The temperature at the time of measurement.
+           Temperature - The temperature in Celsius at the time of measurement.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -224,14 +224,14 @@
  <xs:complexType name="dpMeltingCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the high amount of this elements names are kept short.
+       Due to the high amount of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
      <xs:element name="tmp" type="xs:float">
        <xs:annotation>
          <xs:documentation>
-           Temperature - The temperature of this data point.
+           Temperature - The temperature in Celsius of this data point.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -248,7 +248,7 @@
  <xs:complexType name="experimenterType">
    <xs:annotation>
      <xs:documentation>
-       Contact details of a experimenter.
+       Contact details of an experimenter.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -339,14 +339,14 @@
  </xs:complexType>
 
  <xs:simpleType name="idType">
+   <xs:annotation>
+     <xs:documentation>
+       A ID must be at least one character and unique.
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base ="xs:string">
      <xs:minLength value="1"/>
    </xs:restriction>
-   <xs:annotation>
-     <xs:documentation>
-       A ID must be at least one letter and unique.
-     </xs:documentation>
-   </xs:annotation>
  </xs:simpleType>
 
  <xs:complexType name="lidOpenType">
@@ -427,7 +427,7 @@
      <xs:element name="temperature" type="xs:float">
        <xs:annotation>
          <xs:documentation>
-           The temperature to maintain during the pause.
+           The temperature in Celsius to maintain during the pause.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -442,7 +442,7 @@
        improvements this list is likely to expand. Software should be able 
        handle a "pcrFormatType" not listed here by teating them as 
        "free format".
-       It is required to lable the "id" in "react" according to the pattern
+       It is required to label the "id" in "react" according to the pattern
        give in the enumeration. For example if "96-well plate; A1-H12" is
        selected a valid "id" in "react" must be in the range of "A1" to "H12".
      </xs:documentation>
@@ -486,7 +486,7 @@
      <xs:element name="MD5Hash" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           A MD5Hash calculated over the complete file after removing all
+           An MD5Hash calculated over the complete file after removing all
            rdmlIDTypes and all whitespaces between elements.
          </xs:documentation>
        </xs:annotation>
@@ -497,8 +497,8 @@
  <xs:complexType name="reactType">
    <xs:annotation>
      <xs:documentation>
-       A reaction is a independent chemical reaction corresponding for example
-       to a well in a 96 well plate, a capilary in a rotor or a droplet on the
+       A reaction is an independent chemical reaction corresponding for example
+       to a well in a 96 well plate, a capillary in a rotor or a droplet on the
        biotrophe slides. 
      </xs:documentation>
    </xs:annotation>
@@ -528,7 +528,7 @@
  <xs:complexType name="runType">
    <xs:annotation>
      <xs:documentation>
-       A run is a set of reactions preformed in one "run", as for example 
+       A run is a set of reactions performed in one "run", for example 
        one plate, a slide in a biotrophe or one rotor. 
      </xs:documentation>
    </xs:annotation>
@@ -540,7 +540,7 @@
      <xs:element name="instrument" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Description of the instrument used for to aquire the data.
+           Description of the instrument used to aquire the data.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -576,7 +576,7 @@
      <xs:element name="runDate" type="xs:dateTime" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Date and time stamp when the data were aquired.
+           Date and time stamp when the data was aquired.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -619,7 +619,7 @@
      <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           True if this sample is a calibrator sample FIXME: whats the difference to the previous?
+           True if this sample was used as calibrator sample
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -627,7 +627,7 @@
      <xs:element name="templateRNAQuantity" type="xs:double" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The RNA quantity in one reaction in nanogram.
+           The equivalent RNA concentration in nanogram / microliter in the reaction mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -635,7 +635,7 @@
      <xs:element name="templateDNAQuantity" type="xs:double" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The DNA quantity in one reaction in nanogram.
+           The template DNA concetration in nanogram / microliter in the reaction mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -649,7 +649,7 @@
        unkn - unknown sample
        ntc  - non template control
        nac  - no amplification control
-       std  - standart sample
+       std  - standard sample
        opt  - optical calibrator sample
      </xs:documentation>
    </xs:annotation>
@@ -700,12 +700,18 @@
    </xs:sequence>
  </xs:complexType>
 
+ <xs:simpleType name="stepNumberType">
+   <xs:restriction base="xs:positiveInteger">
+     <xs:minInclusive value="1"/>
+   </xs:restriction>
+ </xs:simpleType>
+
  <xs:complexType name="stepType">
    <xs:sequence>
-     <xs:element name="nr" type="xs:positiveInteger">
+     <xs:element name="nr" type="rdml:stepNumberType">
        <xs:annotation>
          <xs:documentation>
-           The number of the step. First step should be nr = 1 and then 
+           The incremental number of the step. First step should be nr = 1 and then 
            increment each step by + 1.
          </xs:documentation>
        </xs:annotation>
@@ -737,7 +743,7 @@
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Amplification efficiency for the primer set given as the exponent to the base 2.
+           Amplification efficiency for the primer set is given as the exponent to the base 2.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -853,7 +859,7 @@
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The temperature the lid should keep during the cycling.
+           The temperature in Celsius the lid should keep during the cycling.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
