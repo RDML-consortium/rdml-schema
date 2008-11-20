@@ -31,15 +31,38 @@
  </xs:annotation>
 
  <xs:complexType name="cdnaSynthesisMethodType">
+   <xs:annotation>
+     <xs:documentation>
+       Describtion of the cDNA synthesis method.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
-     <xs:element name="enzyme" type="xs:string" minOccurs="0"/>
+     <xs:element name="enzyme" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Enzyme used for reverse transcription, for example "Superscript II". 
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="primingMethod" type="rdml:primingMethodType" minOccurs="0"/>
-     <xs:element name="dnaseTreatment" type="xs:boolean" minOccurs="0"/>
+     <xs:element name="dnaseTreatment" type="xs:boolean" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           True if RNA was DNAse treated prior cDNA synthesis.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="commercialAssayType">
+   <xs:annotation>
+     <xs:documentation>
+       For some comercial assays the primer sequences may be unknown. This element 
+       allows to describe comercial assays.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="company" type="xs:string"/>
      <xs:element name="orderNumber" type="xs:string"/>
@@ -47,6 +70,11 @@
  </xs:complexType>
 
  <xs:simpleType name="cqDetectionMethodType">
+   <xs:annotation>
+     <xs:documentation>
+       The method used to determine the cq value.
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base="xs:string">
      <xs:enumeration value="automated threshold and baseline settings"/>
      <xs:enumeration value="manual threshold and baseline settings"/>
@@ -56,6 +84,11 @@
  </xs:simpleType>
 
  <xs:complexType name="dataCollectionSoftwareType">
+   <xs:annotation>
+     <xs:documentation>
+       Software name and version used to collect the data.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="name" type="xs:string" minOccurs="0"/>
      <xs:element name="version" type="xs:string" minOccurs="0"/>
@@ -64,24 +97,93 @@
 
  <xs:complexType name="dataType">
    <xs:annotation>
-     <xs:documentation>Due to the high amount of this nodes names are kept short
+     <xs:documentation>
+       Due to the high amount of this elements names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="tarId" type="rdml:idType"/>
-     <xs:element name="cq" type="xs:float" minOccurs="0"/>
-     <xs:element name="quantity" type="xs:float" minOccurs="0"/>
-     <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0"/>
-     <xs:element name="exclExp" type="xs:string" minOccurs="0"/>
-     <xs:element name="ampEff" type="xs:float" minOccurs="0"/>
-     <xs:element name="adp" type="rdml:dpAmpCurveType" maxOccurs="unbounded" minOccurs="0"/>
-     <xs:element name="mdp" type="rdml:dpMeltingCurveType" maxOccurs="unbounded" minOccurs="0"/>
-     <xs:element name="bgFluor" type="xs:float" minOccurs="0"/>
-     <xs:element name="quantFluor" type="xs:float" minOccurs="0"/>
+     <xs:element name="tarId" type="rdml:idType">
+       <xs:annotation>
+         <xs:documentation>
+           TargetID - A reference to a target. 
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="cq" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantification cycle - The calculated fractional cycle were 
+           amplification was detected.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="quantity" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantity - A calculated quantity based on the quantity provided with
+           the standard samples.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Excluded - True if this entry should not be evaluated.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="exclExp" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Excluded explanation - The explanation why it was excluded.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="adp" type="rdml:dpAmpCurveType" maxOccurs="unbounded" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Amplification data point - The single data points measured during amplification.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="mdp" type="rdml:dpMeltingCurveType" maxOccurs="unbounded" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Melting curve data point - The single data points measured in the melting analysis.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="endPt" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           End point - Result of an endpoint measurement.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="bgFluor" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Background fluorescence - The measured background fluorescence.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="quantFluor" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantification flourescence - The fluorescence corresponding to the treshold line.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="documentationType">
+   <xs:annotation>
+     <xs:documentation>
+       This elements should be used if the same description applies to many samples, 
+       targets or experiments.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="text" type="xs:string" minOccurs="0"/>
@@ -90,28 +192,65 @@
 
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
-     <xs:documentation>Due to the high amount of this nodes names are kept short
+     <xs:documentation>
+       Due to the high amount of this elements names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="cyc" type="xs:float" />
-     <xs:element name="tmp" type="xs:float" minOccurs="0" maxOccurs="1" />
-     <xs:element name="fluor" type="xs:float"/>
+     <xs:element name="cyc" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           Cycle - The cycle of this data point.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="tmp" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Temperature - The temperature at the time of measurement.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="fluor" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           Fluorescence - The fluorescence measured.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="dpMeltingCurveType">
    <xs:annotation>
-     <xs:documentation>Due to the high amount of this nodes names are kept short
+     <xs:documentation>
+       Due to the high amount of this elements names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="tmp" type="xs:float" />
-     <xs:element name="fluor" type="xs:float"/>
+     <xs:element name="tmp" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           Temperature - The temperature of this data point.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="fluor" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           Fluorescence - The fluorescence measured.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="experimenterType">
+   <xs:annotation>
+     <xs:documentation>
+       Contact details of a experimenter.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="firstName" type="xs:string"/>
@@ -123,6 +262,11 @@
  </xs:complexType>
 
  <xs:complexType name="experimentType">
+   <xs:annotation>
+     <xs:documentation>
+       An experiment can contain several independent runs.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
@@ -132,14 +276,65 @@
  </xs:complexType>
 
  <xs:complexType name="gradientType">
+   <xs:annotation>
+     <xs:documentation>
+       This step forms a temperature gradient on the heat block.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
-     <xs:element name="highTemperature" type="xs:float"/>
-     <xs:element name="lowTemperature" type="xs:float"/>
-     <xs:element name="duration" type="xs:positiveInteger"/>
-     <xs:element name="temperatureChange" type="xs:float" minOccurs="0"/>
-     <xs:element name="durationChange" type="xs:int" minOccurs="0"/>
-     <xs:element name="measure" type="rdml:measureType" minOccurs="0"/>
-     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
+     <xs:element name="highTemperature" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           The high temperature of the gradient in Celsius.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="lowTemperature" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           The low temperature of the gradient in Celsius.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="duration" type="xs:positiveInteger">
+       <xs:annotation>
+         <xs:documentation>
+           The duration of this step in seconds.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="temperatureChange" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The change of the temperature from one cycle to the next:
+           actual highTemperature = highTemperature + (temperatureChange * cycle couter)
+           actual lowTemperature = lowTemperature + (temperatureChange * cycle couter)
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="durationChange" type="xs:int" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The change of the duration from one cycle to the next:
+           actual duration = duration + (durationChange * cycle couter)
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="measure" type="rdml:measureType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Make a measurement and store it as meltcurve or realtime data.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="ramp" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The allowed temperature change from one step to the next in
+           Celsius per second.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
@@ -147,14 +342,49 @@
    <xs:restriction base ="xs:string">
      <xs:minLength value="1"/>
    </xs:restriction>
+   <xs:annotation>
+     <xs:documentation>
+       A ID must be at least one letter and unique.
+     </xs:documentation>
+   </xs:annotation>
  </xs:simpleType>
 
- <xs:complexType name="lidOpenType"/>
+ <xs:complexType name="lidOpenType">
+   <xs:annotation>
+     <xs:documentation>
+       This step waits for the user to open the lid and continues after. It
+       allows to stop the program and to wait for the user to add for example 
+       enzymes and continue the program after. The temperature of the previous
+       step is maintained.
+     </xs:documentation>
+   </xs:annotation>
+ </xs:complexType>
 
  <xs:complexType name="loopType">
+   <xs:annotation>
+     <xs:documentation>
+       This step allows to form a loop or to exclude some steps. It allows to
+       jump to a certain "goto" step for "repeat" times. If the "goto" step is  
+       higher than the step of the loop, "repeat" must be "0".
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
-     <xs:element name="goto" type="xs:positiveInteger"/>
-     <xs:element name="repeat" type="xs:positiveInteger"/>
+     <xs:element name="goto" type="xs:positiveInteger">
+       <xs:annotation>
+         <xs:documentation>
+           The step to go to forming the loop.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="repeat" type="xs:positiveInteger">
+       <xs:annotation>
+         <xs:documentation>
+           How often the loop is repeated. The first run through the loop is 
+           counted as 0, the last loop is "repeat" - 1. The loop is run 
+           through exactly "repeat" times.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
@@ -168,19 +398,55 @@
 
  <xs:complexType name="oligoType">
    <xs:sequence>
-     <xs:element name="threePrimeTag" type="xs:string" minOccurs="0"/>
-     <xs:element name="fivePrimeTag" type="xs:string" minOccurs="0"/>
+     <xs:element name="threePrimeTag" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of three prime modifications if present.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="fivePrimeTag" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of five prime modifications if present.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="sequence" type="rdml:sequenceType"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="pauseType">
+   <xs:annotation>
+     <xs:documentation>
+       This step allows to pause at a certain temperature. It is typically the
+       last step in an amplification protocol.  
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
-     <xs:element name="temperature" type="xs:float"/>
+     <xs:element name="temperature" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           The temperature to maintain during the pause.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:simpleType name="pcrFormatType">
+   <xs:annotation>
+     <xs:documentation>
+       The format of the assay - This allows the software to display the data
+       in a way which resembles the machine sample format. Due to technical 
+       improvements this list is likely to expand. Software should be able 
+       handle a "pcrFormatType" not listed here by teating them as 
+       "free format".
+       It is required to lable the "id" in "react" according to the pattern
+       give in the enumeration. For example if "96-well plate; A1-H12" is
+       selected a valid "id" in "react" must be in the range of "A1" to "H12".
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base="xs:string">
      <xs:enumeration value="single-well; 1"/>
      <xs:enumeration value="48-well plate; A1-F8"/>
@@ -190,11 +456,16 @@
      <xs:enumeration value="32-well rotor; 1-32"/>
      <xs:enumeration value="72-well rotor; 1-72"/>
      <xs:enumeration value="100-well rotor; 1-100"/>
-     <xs:enumeration value="undescribed format"/>
+     <xs:enumeration value="free format"/>
    </xs:restriction>
  </xs:simpleType>
 
  <xs:simpleType name="primingMethodType">
+   <xs:annotation>
+     <xs:documentation>
+       The primers used to reverse transcribe the RNA to cDNA.
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base="xs:string">
      <xs:enumeration value="oligo-dt"/>
      <xs:enumeration value="random"/>
@@ -204,49 +475,184 @@
  </xs:simpleType>
 
  <xs:complexType name="rdmlIdType">
+   <xs:annotation>
+     <xs:documentation>
+       This element can be used to assign an publisher and id to the RDML file.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="publisher" type="xs:string"/>
      <xs:element name="serialNumber" type="xs:string"/>
-     <xs:element name="MD5Hash" type="xs:string" minOccurs="0"/>
+     <xs:element name="MD5Hash" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           A MD5Hash calculated over the complete file after removing all
+           rdmlIDTypes and all whitespaces between elements.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+   </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="reactType">
+   <xs:annotation>
+     <xs:documentation>
+       A reaction is a independent chemical reaction corresponding for example
+       to a well in a 96 well plate, a capilary in a rotor or a droplet on the
+       biotrophe slides. 
+     </xs:documentation>
+   </xs:annotation>
+   <xs:sequence>
+     <xs:element name="id" type="rdml:idType">
+       <xs:annotation>
+         <xs:documentation>
+           The ID of this reaction - The ID can be only assigned freely if 
+           "pcrFormatType" is "free format". Otherwhise it is required to 
+           lable the "id" according to the pattern give in "pcrFormatType".
+           For example if "96-well plate; A1-H12" is selected a valid "id"
+           must be in the range of "A1" to "H12".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="sampleId" type="rdml:idType">
+       <xs:annotation>
+         <xs:documentation>
+           SampleID - A reference to a sample.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="runType">
+   <xs:annotation>
+     <xs:documentation>
+       A run is a set of reactions preformed in one "run", as for example 
+       one plate, a slide in a biotrophe or one rotor. 
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="instrument" type="xs:string" minOccurs="0"/>
-     <xs:element name="dataCollectionSoftware" type="rdml:dataCollectionSoftwareType" minOccurs="0"/>
-     <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0"/>
-     <xs:element name="cqDetectionMethod" type="rdml:cqDetectionMethodType" minOccurs="0"/>
-     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
-     <xs:element name="pcrFormat" type="rdml:pcrFormatType" minOccurs="0"/>
-     <xs:element name="runDate" type="xs:dateTime" minOccurs="0"/>
-     <xs:element name="well" type="rdml:wellType" maxOccurs="unbounded" minOccurs="0"/>
+     <xs:element name="instrument" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of the instrument used for to aquire the data.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="dataCollectionSoftware" type="rdml:dataCollectionSoftwareType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of the software used to aquire the data.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="backgroundDeterminationMethod" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of method used to determine the background.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="cqDetectionMethod" type="rdml:cqDetectionMethodType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of method used to calculate the quantification cycle.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The program used to aquire the data.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="pcrFormat" type="rdml:pcrFormatType"/>
+     <xs:element name="runDate" type="xs:dateTime" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Date and time stamp when the data were aquired.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="react" type="rdml:reactType" maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="sampleType">
+   <xs:annotation>
+     <xs:documentation>
+       A sample is a defined template solution. Dilutions of the same stock 
+       material differ in concentration and are considered different samples. 
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:sampleTypeType" default="unkn"/>
-     <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0"/>
-     <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0"/>
-     <xs:element name="templateIsolationMethod" type="xs:string" minOccurs="0"/>
+     <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           True if this sample should be used as inter run calibrator
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="quantity" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantity - The reference quantity of this sample. This element only makes sense
+           if the "type" is "std" or "opt". If the "type" is "std" this value should give 
+           a copy number or DNA concentration. Only the use of true numbers is valid like 
+           1, 10, 100, 1000 or 1, 0.1, 0.01, 0.001. The use of exponents is not valid like
+           1, 2, 3, 4 or -1, -2, -3, -4. If the "type" is "opt" this value should give 
+           the DNA concentration in nanogram / microliter.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           True if this sample is a calibrator sample FIXME: whats the difference to the previous?
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="cdnaSynthesisMethod" type="rdml:cdnaSynthesisMethodType" minOccurs="0"/>
-     <xs:element name="templateRNAQuantity" type="xs:double" minOccurs="0"/>
+     <xs:element name="templateRNAQuantity" type="xs:double" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The RNA quantity in one reaction in nanogram.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="templateRNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
-     <xs:element name="templateDNAQuantity" type="xs:double" minOccurs="0"/>
+     <xs:element name="templateDNAQuantity" type="xs:double" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The DNA quantity in one reaction in nanogram.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="templateDNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:simpleType name="sampleTypeType">
+   <xs:annotation>
+     <xs:documentation>
+       unkn - unknown sample
+       ntc  - non template control
+       nac  - no amplification control
+       std  - standart sample
+       opt  - optical calibrator sample
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base="xs:string">
      <xs:enumeration value="unkn"/>
      <xs:enumeration value="ntc"/>
@@ -296,7 +702,14 @@
 
  <xs:complexType name="stepType">
    <xs:sequence>
-     <xs:element name="nr" type="xs:positiveInteger"/>
+     <xs:element name="nr" type="xs:positiveInteger">
+       <xs:annotation>
+         <xs:documentation>
+           The number of the step. First step should be nr = 1 and then 
+           increment each step by + 1.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:choice>
        <xs:element name="temperature" type="rdml:temperatureType"/>
@@ -309,20 +722,44 @@
  </xs:complexType>
 
  <xs:complexType name="targetType">
+   <xs:annotation>
+     <xs:documentation>
+       A target is a defined PCR reaction. PCR reactions at the same gene 
+       which differ in primer sequences are considered different samples. 
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
-     <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0"/>
-     <xs:element name="dyeId" type="xs:string" minOccurs="0"/>
+     <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Amplification efficiency for the primer set given as the exponent to the base 2.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="dyeId" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Description of the dye.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="sequences" type="rdml:sequencesType" minOccurs="0"/>
      <xs:element name="commercialAssay" type="rdml:commercialAssayType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
  <xs:simpleType name="targetTypeType">
+   <xs:annotation>
+     <xs:documentation>
+       ref - reference gene
+       toi - target of interest
+     </xs:documentation>
+   </xs:annotation>
    <xs:restriction base="xs:string">
      <xs:enumeration value="ref"/>
      <xs:enumeration value="toi"/>
@@ -330,61 +767,169 @@
  </xs:simpleType>
 
  <xs:complexType name="temperatureType">
+   <xs:annotation>
+     <xs:documentation>
+       This step keeps a constant temperature on the heat block.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
-     <xs:element name="temperature" type="xs:float"/>
-     <xs:element name="duration" type="xs:positiveInteger"/>
-     <xs:element name="temperatureChange" type="xs:float" minOccurs="0"/>
-     <xs:element name="durationChange" type="xs:int" minOccurs="0"/>
-     <xs:element name="measure" type="rdml:measureType" minOccurs="0"/>
-     <xs:element name="ramp" type="xs:float" minOccurs="0"/>
+     <xs:element name="temperature" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           The temperature of the step in Celsius.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="duration" type="xs:positiveInteger">
+       <xs:annotation>
+         <xs:documentation>
+           The duration of this step in seconds.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="temperatureChange" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The change of the temperature from one cycle to the next:
+           actual temperature = temperature + (temperatureChange * cycle couter)
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="durationChange" type="xs:int" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The change of the duration from one cycle to the next:
+           actual duration = duration + (durationChange * cycle couter)
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="measure" type="rdml:measureType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Indicates to make a measurement and store it as meltcurve or realtime data.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="ramp" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The allowed temperature change from one step to the next in
+           Celsius per second.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="templateQualityType">
    <xs:sequence>
-     <xs:element name="method" type="xs:string"/>
-     <xs:element name="result" type="xs:float"/>
+     <xs:element name="method" type="xs:string">
+       <xs:annotation>
+         <xs:documentation>
+           Method used to measure quality, for example "Spectroscopy, OD 260/280".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="result" type="xs:float">
+       <xs:annotation>
+         <xs:documentation>
+           The measured value.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="thermalCyclingConditionType">
+   <xs:annotation>
+     <xs:documentation>
+       A cycling program for PCR or to amplify cDNA.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="lidTemperature" type="xs:float" minOccurs="0"/>
-     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="step" type="rdml:stepType" maxOccurs="unbounded" />
+     <xs:element name="lidTemperature" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The temperature the lid should keep during the cycling.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded">
+       <xs:annotation>
+         <xs:documentation>
+           Reference to the Person who made or uses this protocol.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="step" type="rdml:stepType" maxOccurs="unbounded">
+       <xs:annotation>
+         <xs:documentation>
+           The steps a protocol runs through to amplify DNA.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="thirdPartyExtensionsType">
+   <xs:annotation>
+     <xs:documentation>
+       This is the place to insert extensions not supported by RDML. Please use 
+       a descriptive and unique root element to avoid interference with other 
+       third party extensions.
+     </xs:documentation>
+   </xs:annotation>
    <xs:sequence>
      <xs:any maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="wellType">
-   <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
-     <xs:element name="sampleId" type="rdml:idType"/>
-     <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded"/>
-   </xs:sequence>
- </xs:complexType>
-
  <xs:complexType name="xRefType">
    <xs:sequence>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
-     <xs:element name="id" type="xs:string" minOccurs="0"/>
+     <xs:element name="name" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Reference to an external database, for example "genebank".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="id" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The ID of the entry within the external database, for example "AJ832138".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
  </xs:complexType>
 
  <xs:element name="rdml">
    <xs:complexType>
      <xs:sequence>
-       <xs:element name="dateMade" type="xs:dateTime" minOccurs="0"/>
-       <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0"/>
-       <xs:element name="version" type="xs:string" fixed="1.0"/>
+       <xs:element name="dateMade" type="xs:dateTime" minOccurs="0">
+         <xs:annotation>
+           <xs:documentation>
+             The timestamp of the creation of this file.
+           </xs:documentation>
+         </xs:annotation>
+       </xs:element>
+       <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0">
+         <xs:annotation>
+           <xs:documentation>
+             The timestamp of the last update of this file.
+           </xs:documentation>
+         </xs:annotation>
+       </xs:element>
+       <xs:element name="version" type="xs:string" fixed="1.0">
+         <xs:annotation>
+           <xs:documentation>
+             The RDML version of this file for this schema it must be "1.0".
+           </xs:documentation>
+         </xs:annotation>
+       </xs:element>
        <xs:element name="id" type="rdml:rdmlIdType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experimenter" type="rdml:experimenterType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="documentation" type="rdml:documentationType" maxOccurs="unbounded" minOccurs="0"/>
@@ -435,7 +980,7 @@
    </xs:key>
 
    <xs:keyref name="sampleIdKeyRef" refer="rdml:sampleIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:well" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react" />
      <xs:field xpath="rdml:sampleId" />
    </xs:keyref>
    <xs:key name="sampleIdKey">
@@ -444,7 +989,7 @@
    </xs:key>
 	 
    <xs:keyref name="targetIdKeyRef" refer="rdml:targetIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:well/rdml:data" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:data" />
      <xs:field xpath="rdml:tarId" />
    </xs:keyref>
    <xs:key name="targetIdKey">

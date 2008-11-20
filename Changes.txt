@@ -1,5 +1,24 @@
 Changes in revision 42:
 
+- added Endpoint in data
+
+- ampEff in data is deleted
+
+- well is renamed to react (for reaction)
+
+- added explanation to the elements which are not crystal clear
+
+- added quantity in sample to allow absolute quantification of copies
+
+- deleted templateIsolationMethod
+
+- pcrFormat is not optional any more
+
+- in pcrFormat "undescribed format" is renamed to "free format"
+
+
+Changes in revision 42:
+
 - organism in target removed
 
 - rtPrimerDbId in target removed
