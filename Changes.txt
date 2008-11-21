@@ -1,6 +1,14 @@
+Changes in revision 46:
+
+- changed all IDs and RDML version to attributes
+
+- made some IDs unique
+
+
 Changes in revision 45:
 
 - made xRefs unique (Big thanks to Daniel)
+
 
 Changes in revision 44:
 

@@ -185,9 +185,9 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="text" type="xs:string" minOccurs="0"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:complexType name="dpAmpCurveType">
@@ -252,13 +252,13 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="firstName" type="xs:string"/>
      <xs:element name="lastName" type="xs:string"/>
      <xs:element name="email" type="xs:string" minOccurs="0"/>
      <xs:element name="labName" type="xs:string" minOccurs="0"/>
      <xs:element name="labAddress" type="xs:string" minOccurs="0"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:complexType name="experimentType">
@@ -268,11 +268,21 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="run" type="rdml:runType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="run" type="rdml:runType" minOccurs="0" maxOccurs="unbounded">
+       <xs:unique name="runUniId">
+         <xs:annotation>
+           <xs:documentation>
+             react id within the run must be unique.
+           </xs:documentation>
+         </xs:annotation>
+         <xs:selector xpath="./rdml:react" />
+         <xs:field xpath="@id" />
+       </xs:unique>
+     </xs:element>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:complexType name="gradientType">
@@ -503,17 +513,6 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType">
-       <xs:annotation>
-         <xs:documentation>
-           The ID of this reaction - The ID can be only assigned freely if 
-           "pcrFormatType" is "free format". Otherwhise it is required to 
-           lable the "id" according to the pattern give in "pcrFormatType".
-           For example if "96-well plate; A1-H12" is selected a valid "id"
-           must be in the range of "A1" to "H12".
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
      <xs:element name="sampleId" type="rdml:idType">
        <xs:annotation>
          <xs:documentation>
@@ -523,6 +522,17 @@
      </xs:element>
      <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required">
+     <xs:annotation>
+       <xs:documentation>
+         The ID of this reaction - The ID can be only assigned freely if 
+         "pcrFormatType" is "free format". Otherwhise it is required to 
+         lable the "id" according to the pattern give in "pcrFormatType".
+         For example if "96-well plate; A1-H12" is selected a valid "id"
+         must be in the range of "A1" to "H12".
+       </xs:documentation>
+     </xs:annotation>
+   </xs:attribute>
  </xs:complexType>
 
  <xs:complexType name="runType">
@@ -533,7 +543,6 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
@@ -582,6 +591,7 @@
      </xs:element>
      <xs:element name="react" type="rdml:reactType" maxOccurs="unbounded" minOccurs="0"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:complexType name="sampleType">
@@ -592,7 +602,6 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
@@ -641,6 +650,7 @@
      </xs:element>
      <xs:element name="templateDNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:simpleType name="sampleTypeType">
@@ -735,7 +745,6 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
@@ -757,6 +766,7 @@
      <xs:element name="sequences" type="rdml:sequencesType" minOccurs="0"/>
      <xs:element name="commercialAssay" type="rdml:commercialAssayType" minOccurs="0"/>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:simpleType name="targetTypeType">
@@ -853,7 +863,6 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="id" type="rdml:idType"/>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0">
@@ -878,6 +887,7 @@
        </xs:annotation>
      </xs:element>
    </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:complexType name="thirdPartyExtensionsType">
@@ -929,13 +939,6 @@
            </xs:documentation>
          </xs:annotation>
        </xs:element>
-       <xs:element name="version" type="xs:string" fixed="1.0">
-         <xs:annotation>
-           <xs:documentation>
-             The RDML version of this file for this schema it must be "1.0".
-           </xs:documentation>
-         </xs:annotation>
-       </xs:element>
        <xs:element name="id" type="rdml:rdmlIdType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experimenter" type="rdml:experimenterType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="documentation" type="rdml:documentationType" maxOccurs="unbounded" minOccurs="0"/>
@@ -963,25 +966,33 @@
            <xs:field xpath="rdml:name" />
          </xs:unique>
        </xs:element>
-       <xs:element name="thermalCyclingCondition" type="rdml:thermalCyclingConditionType" maxOccurs="unbounded" minOccurs="0"/>
-       <xs:element name="experiment" type="rdml:experimentType" maxOccurs="unbounded" minOccurs="0"/>
-       <xs:element name="thirdPartyExtensions" type="rdml:thirdPartyExtensionsType" minOccurs="0"/>
+       <xs:element name="thermalCyclingCondition" type="rdml:thermalCyclingConditionType" maxOccurs="unbounded" minOccurs="0">
+         <xs:unique name="thermalUniId">
+           <xs:annotation>
+             <xs:documentation>
+               step nr within the thermalCyclingCondition must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:step" />
+           <xs:field xpath="rdml:nr" />
+         </xs:unique>
+       </xs:element>
+       <xs:element name="experiment" type="rdml:experimentType" maxOccurs="unbounded" minOccurs="0">
+         <xs:unique name="experimentUniId">
+           <xs:annotation>
+             <xs:documentation>
+               run IDs within the experiment types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:run" />
+           <xs:field xpath="@id" />
+         </xs:unique>
+      </xs:element>
+      <xs:element name="thirdPartyExtensions" type="rdml:thirdPartyExtensionsType" minOccurs="0"/>
      </xs:sequence>
+   <xs:attribute name="version" type="xs:string" fixed="1.0" use="required"/>
    </xs:complexType>
    
-   <xs:keyref name="experimenterIdKeyRef" refer="rdml:experimenterIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run" />
-     <xs:field xpath="rdml:experimenterId" />
-   </xs:keyref>
-   <xs:keyref name="experimenterIdKeyRef2" refer="rdml:experimenterIdKey">
-     <xs:selector xpath="./rdml:thermalCyclingCondition" />
-     <xs:field xpath="rdml:experimenterId" />
-   </xs:keyref>
-   <xs:key name="experimenterIdKey">
-     <xs:selector xpath="./rdml:experimenter" />
-     <xs:field xpath="rdml:id" />
-   </xs:key>
-
    <xs:keyref name="documentationIdKeyRef" refer="rdml:documentationIdKey">
      <xs:selector xpath="./rdml:sample" />
      <xs:field xpath="rdml:documentationId" />
@@ -1004,7 +1015,25 @@
    </xs:keyref>
    <xs:key name="documentationIdKey">
      <xs:selector xpath="./rdml:documentation" />
-     <xs:field xpath="rdml:id" />
+     <xs:field xpath="@id" />
+   </xs:key>
+
+   <xs:key name="experimentIdKey">
+     <xs:selector xpath="./rdml:experiment" />
+     <xs:field xpath="@id" />
+   </xs:key>
+
+   <xs:keyref name="experimenterIdKeyRef" refer="rdml:experimenterIdKey">
+     <xs:selector xpath="./rdml:experiment/rdml:run" />
+     <xs:field xpath="rdml:experimenterId" />
+   </xs:keyref>
+   <xs:keyref name="experimenterIdKeyRef2" refer="rdml:experimenterIdKey">
+     <xs:selector xpath="./rdml:thermalCyclingCondition" />
+     <xs:field xpath="rdml:experimenterId" />
+   </xs:keyref>
+   <xs:key name="experimenterIdKey">
+     <xs:selector xpath="./rdml:experimenter" />
+     <xs:field xpath="@id" />
    </xs:key>
 
    <xs:keyref name="sampleIdKeyRef" refer="rdml:sampleIdKey">
@@ -1013,7 +1042,7 @@
    </xs:keyref>
    <xs:key name="sampleIdKey">
      <xs:selector xpath="./rdml:sample" />
-     <xs:field xpath="rdml:id" />
+     <xs:field xpath="@id" />
    </xs:key>
 	 
    <xs:keyref name="targetIdKeyRef" refer="rdml:targetIdKey">
@@ -1022,7 +1051,7 @@
    </xs:keyref>
    <xs:key name="targetIdKey">
      <xs:selector xpath="./rdml:target" />
-     <xs:field xpath="rdml:id" />
+     <xs:field xpath="@id" />
    </xs:key>
 	 
    <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="rdml:thermalCyclingConditionsIdKey">
@@ -1035,7 +1064,7 @@
    </xs:keyref>
    <xs:key name="thermalCyclingConditionsIdKey">
      <xs:selector xpath="./rdml:thermalCyclingCondition" />
-     <xs:field xpath="rdml:id" />
+     <xs:field xpath="@id" />
    </xs:key>
    </xs:element>
 </xs:schema>
