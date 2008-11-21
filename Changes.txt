@@ -1,3 +1,7 @@
+Changes in revision 45:
+
+- made xRefs unique (Big thanks to Daniel)
+
 Changes in revision 44:
 
 - Fixed typos in annotations (Thanks to Daniel)

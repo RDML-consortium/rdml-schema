@@ -939,8 +939,30 @@
        <xs:element name="id" type="rdml:rdmlIdType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experimenter" type="rdml:experimenterType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="documentation" type="rdml:documentationType" maxOccurs="unbounded" minOccurs="0"/>
-       <xs:element name="sample" type="rdml:sampleType" maxOccurs="unbounded" minOccurs="0"/>
-       <xs:element name="target" type="rdml:targetType" maxOccurs="unbounded" minOccurs="0"/>
+       <xs:element name="sample" type="rdml:sampleType" maxOccurs="unbounded" minOccurs="0">
+         <xs:unique name="sampleXRefId">
+           <xs:annotation>
+             <xs:documentation>
+               xRefs within the sample types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:xRef" />
+           <xs:field xpath="rdml:id" />
+           <xs:field xpath="rdml:name" />
+         </xs:unique>
+       </xs:element>
+       <xs:element name="target" type="rdml:targetType" maxOccurs="unbounded" minOccurs="0">
+         <xs:unique name="targetXRefId">
+           <xs:annotation>
+             <xs:documentation>
+               xRefs within the sample types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:xRef" />
+           <xs:field xpath="rdml:id" />
+           <xs:field xpath="rdml:name" />
+         </xs:unique>
+       </xs:element>
        <xs:element name="thermalCyclingCondition" type="rdml:thermalCyclingConditionType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experiment" type="rdml:experimentType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="thirdPartyExtensions" type="rdml:thirdPartyExtensionsType" minOccurs="0"/>
