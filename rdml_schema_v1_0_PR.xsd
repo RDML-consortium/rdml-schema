@@ -40,7 +40,7 @@
      <xs:element name="enzyme" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Enzyme used for reverse transcription, for example "Superscript II". 
+           Enzyme used for reverse transcription. 
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -98,7 +98,7 @@
  <xs:complexType name="dataType">
    <xs:annotation>
      <xs:documentation>
-       Due to the high amount of this elements names are kept short.
+       Due to the high numbers of this elements names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -122,6 +122,13 @@
          <xs:documentation>
            Quantity - A calculated quantity based on the quantity provided with
            the standard samples.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="quantUnit" type="rdml:quantityUnitType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantity Unit - The unit for the value in quantity.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -193,7 +200,7 @@
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the high amount of this element, names are kept short.
+       Due to the high numbers of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -224,7 +231,7 @@
  <xs:complexType name="dpMeltingCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the high amount of this element, names are kept short.
+       Due to the high numbers of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -484,6 +491,28 @@
    </xs:restriction>
  </xs:simpleType>
 
+ <xs:simpleType name="quantityUnitType">
+   <xs:annotation>
+     <xs:documentation>
+       The unit the quantity
+       cop   - copies per microliter  
+       fold  - fold change  
+       dil   - dilution (10 would mean 1:10 dilution)  
+       nMol  - nanomol per microliter 
+       ng    - nanogram per microliter 
+       other - other unit (must be linear, no exponents or logarithms allowed) 
+     </xs:documentation>
+   </xs:annotation>
+   <xs:restriction base="xs:string">
+     <xs:enumeration value="cop"/>
+     <xs:enumeration value="fold"/>
+     <xs:enumeration value="dil"/>
+     <xs:enumeration value="ng"/>
+     <xs:enumeration value="nMol"/>
+     <xs:enumeration value="other"/>
+   </xs:restriction>
+ </xs:simpleType>
+
  <xs:complexType name="rdmlIdType">
    <xs:annotation>
      <xs:documentation>
@@ -621,7 +650,15 @@
            a copy number or DNA concentration. Only the use of true numbers is valid like 
            1, 10, 100, 1000 or 1, 0.1, 0.01, 0.001. The use of exponents is not valid like
            1, 2, 3, 4 or -1, -2, -3, -4. If the "type" is "opt" this value should give 
-           the DNA concentration in nanogram / microliter.
+           the DNA concentration in nanogram / microliter. Use quantUnit to indicate the 
+           unit.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="quantUnit" type="rdml:quantityUnitType" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Quantity Unit - The unit for the value in quantity.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
