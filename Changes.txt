@@ -1,3 +1,8 @@
+Changes in revision 49:
+
+- fixed some typos
+
+
 Changes in revision 48:
 
 - added a unit for quantity

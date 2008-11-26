@@ -347,8 +347,8 @@
      <xs:element name="ramp" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The allowed temperature change from one step to the next in
-           Celsius per second.
+           The temperature change from one step to the next in
+           Celsius per second. No value means maximal change rate.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -649,7 +649,8 @@
            if the "type" is "std" or "opt". If the "type" is "std" this value should give 
            a copy number or DNA concentration. Only the use of true numbers is valid like 
            1, 10, 100, 1000 or 1, 0.1, 0.01, 0.001. The use of exponents is not valid like
-           1, 2, 3, 4 or -1, -2, -3, -4. If the "type" is "opt" this value should give 
+           1, 2, 3, 4 or -1, -2, -3, -4 beause it will not be interpreted as 10E1, 10E2, 
+           10E3, 10E4 or 10E-1, 10E-2, 10E-3. If the "type" is "opt" this value should give 
            the DNA concentration in nanogram / microliter. Use quantUnit to indicate the 
            unit.
          </xs:documentation>
@@ -867,7 +868,7 @@
        <xs:annotation>
          <xs:documentation>
            The allowed temperature change from one step to the next in
-           Celsius per second.
+           Celsius per second. No value means maximal change rate.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -912,7 +913,7 @@
      <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded">
        <xs:annotation>
          <xs:documentation>
-           Reference to the Person who made or uses this protocol.
+           Reference to the person who made or uses this protocol.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
