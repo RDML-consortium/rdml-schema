@@ -117,18 +117,11 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="quantity" type="xs:float" minOccurs="0">
+     <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
            Quantity - A calculated quantity based on the quantity provided with
            the standard samples.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
-     <xs:element name="quantUnit" type="rdml:quantityUnitType" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           Quantity Unit - The unit for the value in quantity.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -191,9 +184,9 @@
        targets or experiments.
      </xs:documentation>
    </xs:annotation>
-   <xs:sequence>
+   <xs:all>
      <xs:element name="text" type="xs:string" minOccurs="0"/>
-   </xs:sequence>
+   </xs:all>
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
@@ -491,6 +484,18 @@
    </xs:restriction>
  </xs:simpleType>
 
+ <xs:complexType name="quantityType">
+   <xs:annotation>
+     <xs:documentation>
+       A quantity is always defined by its value and its unit.  
+     </xs:documentation>
+   </xs:annotation>
+   <xs:sequence>
+     <xs:element name="value" type="xs:float"/>
+     <xs:element name="Unit" type="rdml:quantityUnitType"/>
+   </xs:sequence>
+ </xs:complexType>
+
  <xs:simpleType name="quantityUnitType">
    <xs:annotation>
      <xs:documentation>
@@ -642,7 +647,7 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="quantity" type="xs:float" minOccurs="0">
+     <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
            Quantity - The reference quantity of this sample. This element only makes sense
@@ -653,13 +658,6 @@
            10E3, 10E4 or 10E-1, 10E-2, 10E-3. If the "type" is "opt" this value should give 
            the DNA concentration in nanogram / microliter. Use quantUnit to indicate the 
            unit.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
-     <xs:element name="quantUnit" type="rdml:quantityUnitType" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           Quantity Unit - The unit for the value in quantity.
          </xs:documentation>
        </xs:annotation>
      </xs:element>

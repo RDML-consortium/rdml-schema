@@ -1,3 +1,10 @@
+Changes in revision 51:
+
+- quantity and unit is one element
+
+- document is now all
+
+
 Changes in revision 49:
 
 - fixed some typos
