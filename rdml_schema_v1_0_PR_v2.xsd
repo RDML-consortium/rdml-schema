@@ -190,6 +190,10 @@
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
+ <xs:complexType name="documentationReferencesType">
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
+ </xs:complexType>
+
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
      <xs:documentation>
@@ -269,7 +273,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="run" type="rdml:runType" minOccurs="0" maxOccurs="unbounded">
        <xs:unique name="runUniId">
          <xs:annotation>
@@ -278,6 +282,15 @@
            </xs:documentation>
          </xs:annotation>
          <xs:selector xpath="./rdml:react" />
+         <xs:field xpath="@id" />
+       </xs:unique>
+       <xs:unique name="runDocumentationId">
+         <xs:annotation>
+           <xs:documentation>
+             Documentation references within the run types must be unique.
+           </xs:documentation>
+         </xs:annotation>
+         <xs:selector xpath="./rdml:documentation" />
          <xs:field xpath="@id" />
        </xs:unique>
      </xs:element>
@@ -492,7 +505,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="value" type="xs:float"/>
-     <xs:element name="Unit" type="rdml:quantityUnitType"/>
+     <xs:element name="unit" type="rdml:quantityUnitType"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -578,7 +591,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="instrument" type="xs:string" minOccurs="0">
        <xs:annotation>
@@ -637,7 +650,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:sampleTypeType" default="unkn"/>
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
@@ -782,7 +795,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0">
@@ -900,7 +913,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentationId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -989,6 +1002,15 @@
            <xs:field xpath="rdml:id" />
            <xs:field xpath="rdml:name" />
          </xs:unique>
+         <xs:unique name="sampleDocumentationId">
+           <xs:annotation>
+             <xs:documentation>
+               Documentation references within the sample types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:documentation" />
+           <xs:field xpath="@id" />
+         </xs:unique>
        </xs:element>
        <xs:element name="target" type="rdml:targetType" maxOccurs="unbounded" minOccurs="0">
          <xs:unique name="targetXRefId">
@@ -1001,6 +1023,15 @@
            <xs:field xpath="rdml:id" />
            <xs:field xpath="rdml:name" />
          </xs:unique>
+         <xs:unique name="targetDocumentationId">
+           <xs:annotation>
+             <xs:documentation>
+               Documentation references within the target types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:documentation" />
+           <xs:field xpath="@id" />
+         </xs:unique>
        </xs:element>
        <xs:element name="thermalCyclingCondition" type="rdml:thermalCyclingConditionType" maxOccurs="unbounded" minOccurs="0">
          <xs:unique name="thermalUniId">
@@ -1011,6 +1042,15 @@
            </xs:annotation>
            <xs:selector xpath="./rdml:step" />
            <xs:field xpath="rdml:nr" />
+         </xs:unique>
+         <xs:unique name="thermalCyclingConditionDocumentationId">
+           <xs:annotation>
+             <xs:documentation>
+               Documentation references within the thermalCyclingCondition types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:documentation" />
+           <xs:field xpath="@id" />
          </xs:unique>
        </xs:element>
        <xs:element name="experiment" type="rdml:experimentType" maxOccurs="unbounded" minOccurs="0">
@@ -1023,33 +1063,42 @@
            <xs:selector xpath="./rdml:run" />
            <xs:field xpath="@id" />
          </xs:unique>
+         <xs:unique name="experimentDocumentationId">
+           <xs:annotation>
+             <xs:documentation>
+               Documentation references within the experiment types must be unique.
+             </xs:documentation>
+           </xs:annotation>
+           <xs:selector xpath="./rdml:documentation" />
+           <xs:field xpath="@id" />
+         </xs:unique>
       </xs:element>
       <xs:element name="thirdPartyExtensions" type="rdml:thirdPartyExtensionsType" minOccurs="0"/>
      </xs:sequence>
    <xs:attribute name="version" type="xs:string" fixed="1.0" use="required"/>
    </xs:complexType>
    
-   <xs:keyref name="documentationIdKeyRef" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:sample" />
-     <xs:field xpath="rdml:documentationId" />
+   <xs:keyref name="documentationKeyRef" refer="rdml:documentationKey">
+     <xs:selector xpath="./rdml:sample/rdml:documentation" />
+     <xs:field xpath="@id" />
    </xs:keyref>
-   <xs:keyref name="documentationIdKeyRef2" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:target" />
-     <xs:field xpath="rdml:documentationId" />
+   <xs:keyref name="documentationKeyRef2" refer="rdml:documentationKey">
+     <xs:selector xpath="./rdml:target/rdml:documentation" />
+     <xs:field xpath="@id" />
    </xs:keyref>
-   <xs:keyref name="documentationIdKeyRef3" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:thermalCyclingCondition" />
-     <xs:field xpath="rdml:documentationId" />
+   <xs:keyref name="documentationKeyRef3" refer="rdml:documentationKey">
+     <xs:selector xpath="./rdml:thermalCyclingCondition/rdml:documentation" />
+     <xs:field xpath="@id" />
    </xs:keyref>
-   <xs:keyref name="documentationIdKeyRef4" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:experiment" />
-     <xs:field xpath="rdml:documentationId" />
+   <xs:keyref name="documentationKeyRef4" refer="rdml:documentationKey">
+     <xs:selector xpath="./rdml:experiment/rdml:documentation" />
+     <xs:field xpath="@id" />
    </xs:keyref>
-   <xs:keyref name="documentationIdKeyRef5" refer="rdml:documentationIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run" />
-     <xs:field xpath="rdml:documentationId" />
+   <xs:keyref name="documentationKeyRef5" refer="rdml:documentationKey">
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:documentation" />
+     <xs:field xpath="@id" />
    </xs:keyref>
-   <xs:key name="documentationIdKey">
+   <xs:key name="documentationKey">
      <xs:selector xpath="./rdml:documentation" />
      <xs:field xpath="@id" />
    </xs:key>

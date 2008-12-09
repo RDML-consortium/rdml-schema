@@ -1,3 +1,10 @@
+Changes in revision 58:
+
+- documentID are changed to document with attribute ID
+
+- quantityType Unit is changed to unit
+
+
 Changes in revision 51:
 
 - quantity and unit is one element
