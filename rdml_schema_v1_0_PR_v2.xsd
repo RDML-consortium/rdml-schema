@@ -52,7 +52,7 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0"/>
+     <xs:element name="thermalCyclingConditions" type="rdml:idReferencesType" minOccurs="0"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -102,7 +102,7 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="tarId" type="rdml:idType">
+     <xs:element name="tar" type="rdml:idReferencesType">
        <xs:annotation>
          <xs:documentation>
            TargetID - A reference to a target. 
@@ -190,10 +190,6 @@
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
- <xs:complexType name="documentationReferencesType">
-   <xs:attribute name="id" type="rdml:idType" use="required"/>
- </xs:complexType>
-
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
      <xs:documentation>
@@ -273,7 +269,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="run" type="rdml:runType" minOccurs="0" maxOccurs="unbounded">
        <xs:unique name="runUniId">
          <xs:annotation>
@@ -359,6 +355,10 @@
        </xs:annotation>
      </xs:element>
    </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="idReferencesType">
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
  <xs:simpleType name="idType">
@@ -560,7 +560,7 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="sampleId" type="rdml:idType">
+     <xs:element name="sample" type="rdml:idReferencesType">
        <xs:annotation>
          <xs:documentation>
            SampleID - A reference to a sample.
@@ -591,8 +591,8 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="experimenter" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="instrument" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -621,7 +621,7 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="thermalCyclingConditionsId" type="rdml:idType" minOccurs="0">
+     <xs:element name="thermalCyclingConditions" type="rdml:idReferencesType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
            The program used to aquire the data.
@@ -650,7 +650,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:sampleTypeType" default="unkn"/>
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
@@ -795,7 +795,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0">
@@ -913,7 +913,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
-     <xs:element name="documentation" type="rdml:documentationReferencesType" minOccurs="0" maxOccurs="unbounded"/>
+     <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="lidTemperature" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -921,7 +921,7 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="experimenterId" type="rdml:idType" minOccurs="0" maxOccurs="unbounded">
+     <xs:element name="experimenter" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded">
        <xs:annotation>
          <xs:documentation>
            Reference to the person who made or uses this protocol.
@@ -1109,12 +1109,12 @@
    </xs:key>
 
    <xs:keyref name="experimenterIdKeyRef" refer="rdml:experimenterIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run" />
-     <xs:field xpath="rdml:experimenterId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:experimenter" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:keyref name="experimenterIdKeyRef2" refer="rdml:experimenterIdKey">
-     <xs:selector xpath="./rdml:thermalCyclingCondition" />
-     <xs:field xpath="rdml:experimenterId" />
+     <xs:selector xpath="./rdml:thermalCyclingCondition/rdml:experimenter" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:key name="experimenterIdKey">
      <xs:selector xpath="./rdml:experimenter" />
@@ -1122,8 +1122,8 @@
    </xs:key>
 
    <xs:keyref name="sampleIdKeyRef" refer="rdml:sampleIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react" />
-     <xs:field xpath="rdml:sampleId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:sample" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:key name="sampleIdKey">
      <xs:selector xpath="./rdml:sample" />
@@ -1131,8 +1131,8 @@
    </xs:key>
 	 
    <xs:keyref name="targetIdKeyRef" refer="rdml:targetIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:data" />
-     <xs:field xpath="rdml:tarId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:data/rdml:tar" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:key name="targetIdKey">
      <xs:selector xpath="./rdml:target" />
@@ -1140,12 +1140,12 @@
    </xs:key>
 	 
    <xs:keyref name="thermalCyclingConditionsIdKeyRef" refer="rdml:thermalCyclingConditionsIdKey">
-     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:dataCollectionSoftware" />
-     <xs:field xpath="rdml:thermalCyclingConditionsId" />
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:thermalCyclingConditions" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:keyref name="thermalCyclingConditionsIdKeyRef2" refer="rdml:thermalCyclingConditionsIdKey">
-     <xs:selector xpath="./rdml:sample/rdml:cdnaSynthesisMethod" />
-     <xs:field xpath="rdml:thermalCyclingConditionsId" />
+     <xs:selector xpath="./rdml:sample/rdml:cdnaSynthesisMethod/rdml:thermalCyclingConditions" />
+     <xs:field xpath="@id" />
    </xs:keyref>
    <xs:key name="thermalCyclingConditionsIdKey">
      <xs:selector xpath="./rdml:thermalCyclingCondition" />

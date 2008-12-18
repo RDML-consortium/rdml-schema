@@ -1,3 +1,20 @@
+Changes in revision 61:
+
+- in run thermalCyclingConditionsId renamed to thermalCyclingConditions  and ID is attribute
+
+- in cdnaSynthesisMethod thermalCyclingConditionsId renamed to thermalCyclingConditions  and ID is attribute
+
+- in data tarId renamed to tar  and ID is attribute
+
+- in react sampleId renamed to sample  and ID is attribute
+
+- in thermalCyclingCondition experimenterId renamed to experimenter  and ID is attribute
+
+- in run experimenterId renamed to experimenter  and ID is attribute
+
+- documentReferencesType renamed to idReferencesType - should not change anything
+
+
 Changes in revision 58:
 
 - documentID are changed to document with attribute ID
