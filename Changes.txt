@@ -1,3 +1,7 @@
+Changes in revision 63:
+
+- unique Experimenter IDs
+
 Changes in revision 62:
 
 - in rdml thermalCyclingCondition renamed to thermalCyclingConditions
