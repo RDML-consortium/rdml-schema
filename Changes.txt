@@ -1,3 +1,7 @@
+Changes in revision 62:
+
+- in rdml thermalCyclingCondition renamed to thermalCyclingConditions
+
 Changes in revision 61:
 
 - in run thermalCyclingConditionsId renamed to thermalCyclingConditions  and ID is attribute
