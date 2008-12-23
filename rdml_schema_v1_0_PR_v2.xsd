@@ -814,6 +814,13 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="detectionLimit" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The detection limit is given as the maximal fractional cycle were detection is possible.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="dyeId" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>

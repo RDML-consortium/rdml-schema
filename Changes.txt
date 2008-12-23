@@ -1,3 +1,7 @@
+Changes in revision 64:
+
+- Introduced detectionLimit in target (reviewers request)
+
 Changes in revision 63:
 
 - unique Experimenter IDs
