@@ -817,7 +817,7 @@
      <xs:element name="detectionLimit" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The detection limit is given as the maximal fractional cycle were detection is possible.
+           The detection limit is given in copies per microliter.
          </xs:documentation>
        </xs:annotation>
      </xs:element>

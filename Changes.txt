@@ -1,3 +1,7 @@
+Changes in revision 65:
+
+- Changed detectionLimit in target description (unit)
+
 Changes in revision 64:
 
 - Introduced detectionLimit in target (reviewers request)
