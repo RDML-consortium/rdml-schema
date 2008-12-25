@@ -1,3 +1,7 @@
+Changes in revision 67:
+
+- Fixed a typo - only affects schema
+
 Changes in revision 66:
 
 - Finished renaming thermalCyclingCondition to thermalCyclingConditions
