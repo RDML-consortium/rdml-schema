@@ -1,3 +1,9 @@
+Changes in revision 68:
+
+- Fixed a typo - lable to label
+
+- Made all dataCollectionSoftwareType non-optional
+
 Changes in revision 67:
 
 - Fixed a typo - only affects schema

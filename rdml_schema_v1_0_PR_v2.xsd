@@ -90,8 +90,8 @@
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
-     <xs:element name="name" type="xs:string" minOccurs="0"/>
-     <xs:element name="version" type="xs:string" minOccurs="0"/>
+     <xs:element name="name" type="xs:string"/>
+     <xs:element name="version" type="xs:string"/>
    </xs:sequence>
  </xs:complexType>
 
@@ -583,7 +583,7 @@
        <xs:documentation>
          The ID of this reaction - The ID can be only assigned freely if 
          "pcrFormatType" is "free format". Otherwhise it is required to 
-         lable the "id" according to the pattern give in "pcrFormatType".
+         label the "id" according to the pattern give in "pcrFormatType".
          For example if "96-well plate; A1-H12" is selected a valid "id"
          must be in the range of "A1" to "H12".
        </xs:documentation>
