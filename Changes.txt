@@ -1,3 +1,9 @@
+Changes in revision 69:
+
+- dataType excl and exclExp joined together
+
+- Removed none from measureType
+
 Changes in revision 68:
 
 - Fixed a typo - lable to label

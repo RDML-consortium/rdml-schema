@@ -125,17 +125,11 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="excl" type="xs:boolean" default="false" minOccurs="0">
+     <xs:element name="excl" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Excluded - True if this entry should not be evaluated.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
-     <xs:element name="exclExp" type="xs:string" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           Excluded explanation - The explanation why it was excluded.
+           Excluded - Present if this entry should not be evaluated. It can contain
+           an string with an explanation why it was excluded.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -422,7 +416,6 @@
 
  <xs:simpleType name="measureType">
    <xs:restriction base="xs:string">
-     <xs:enumeration value="none"/>
      <xs:enumeration value="real time"/>
      <xs:enumeration value="meltcurve"/>
    </xs:restriction>
