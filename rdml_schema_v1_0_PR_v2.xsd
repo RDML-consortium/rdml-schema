@@ -569,7 +569,26 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded"/>
+     <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded">
+       <xs:unique name="adpCycUnique">
+         <xs:annotation>
+           <xs:documentation>
+             cyc within the adp must be unique.
+           </xs:documentation>
+         </xs:annotation>
+         <xs:selector xpath="./rdml:adp" />
+         <xs:field xpath="rdml:cyc" />
+       </xs:unique>
+       <xs:unique name="mdpTmpUnique">
+         <xs:annotation>
+           <xs:documentation>
+             tmp within the mdp must be unique.
+           </xs:documentation>
+         </xs:annotation>
+         <xs:selector xpath="./rdml:mdp" />
+         <xs:field xpath="rdml:tmp" />
+       </xs:unique>
+     </xs:element>
    </xs:sequence>
    <xs:attribute name="id" type="rdml:idType" use="required">
      <xs:annotation>
@@ -638,7 +657,17 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="react" type="rdml:reactType" maxOccurs="unbounded" minOccurs="0"/>
+     <xs:element name="react" type="rdml:reactType" maxOccurs="unbounded" minOccurs="0">
+       <xs:unique name="dataTarID">
+         <xs:annotation>
+           <xs:documentation>
+             tarID within the data must be unique.
+           </xs:documentation>
+         </xs:annotation>
+         <xs:selector xpath="./rdml:data" />
+         <xs:field xpath="rdml:tarId" />
+       </xs:unique>
+     </xs:element>
    </xs:sequence>
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
@@ -647,7 +676,11 @@
    <xs:annotation>
      <xs:documentation>
        A sample is a defined template solution. Dilutions of the same stock 
-       material differ in concentration and are considered different samples. 
+       material differ in concentration and are considered different samples.
+       A technical replicate samples should contain the same name (reactions 
+       are performed on the same material), and biological replicates should 
+       contain different names (the nucleic acids derived from the different 
+       biological replicates are not the same). 
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>

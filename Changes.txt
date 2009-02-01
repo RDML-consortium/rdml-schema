@@ -1,3 +1,13 @@
+Changes in revision 70:
+
+- modified sample description
+
+- unique cycles in adp
+
+- unique temp in mdp
+
+- unique tarId in data
+
 Changes in revision 69:
 
 - dataType excl and exclExp joined together
