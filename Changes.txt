@@ -1,3 +1,7 @@
+Changes in revision 71:
+
+- fixed unique tar @Id in data
+
 Changes in revision 70:
 
 - modified sample description
