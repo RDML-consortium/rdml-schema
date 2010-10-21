@@ -114,6 +114,8 @@
          <xs:documentation>
            Quantification cycle - The calculated fractional cycle where 
            amplification was detected.
+           Negative values are used to express following conditions:
+           Not Available: -1.0
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -239,6 +241,18 @@
    </xs:sequence>
  </xs:complexType>
 
+ <xs:complexType name="dyeType">
+   <xs:annotation>
+     <xs:documentation>
+       Information on a dye.
+     </xs:documentation>
+   </xs:annotation>
+   <xs:sequence>
+     <xs:element name="description" type="xs:string" minOccurs="0"/>
+   </xs:sequence>
+   <xs:attribute name="id" type="rdml:idType" use="required"/>
+ </xs:complexType>
+ 
  <xs:complexType name="experimenterType">
    <xs:annotation>
      <xs:documentation>
@@ -459,31 +473,38 @@
    </xs:sequence>
  </xs:complexType>
 
- <xs:simpleType name="pcrFormatType">
+ <xs:complexType name="pcrFormatType">
    <xs:annotation>
      <xs:documentation>
        The format of the assay - This allows the software to display the data
-       in a way which resembles the machine sample format. Due to technical 
-       improvements this list is likely to expand. Software should be able 
-       handle a "pcrFormatType" not listed here by teating them as 
-       "free format".
-       It is required to label the "id" in "react" according to the pattern
-       give in the enumeration. For example if "96-well plate; A1-H12" is
-       selected a valid "id" in "react" must be in the range of "A1" to "H12".
+       in a way which resembles the machine sample format.
+       In rotor formats columns are allways 1 and rows correspond to the number
+       of places in the rotor.
+       
+       Values for common formats are:
+       
+       Format            |    rows    |   columns
+       ---------------------------------------------
+       single-well       |     1      |      1   
+       48-well plate     |     6      |      8
+       96-well plate     |     8      |     12
+       384-well plate    |    16      |     24
+       3072-well plate   |    32      |     96
+       32-well rotor     |    32      |      1
+       72-well rotor     |    72      |      1
+       100-well rotor    |   100      |      1
+       free format       |    -1      |      1
+       
+       If rows are -1 then the software should not try to recontruct a plate and 
+       just display all react data in list form.
+          
      </xs:documentation>
    </xs:annotation>
-   <xs:restriction base="xs:string">
-     <xs:enumeration value="single-well; 1"/>
-     <xs:enumeration value="48-well plate; A1-F8"/>
-     <xs:enumeration value="96-well plate; A1-H12"/>
-     <xs:enumeration value="384-well plate; A1-P24"/>
-     <xs:enumeration value="3072-well plate; A1a1-D12h8"/>
-     <xs:enumeration value="32-well rotor; 1-32"/>
-     <xs:enumeration value="72-well rotor; 1-72"/>
-     <xs:enumeration value="100-well rotor; 1-100"/>
-     <xs:enumeration value="free format"/>
-   </xs:restriction>
- </xs:simpleType>
+   <xs:sequence>
+     <xs:element name="rows" type="xs:int"/>
+     <xs:element name="columns" type="xs:int"/>
+   </xs:sequence>
+ </xs:complexType>
 
  <xs:simpleType name="primingMethodType">
    <xs:annotation>
@@ -591,14 +612,42 @@
        </xs:unique>
      </xs:element>
    </xs:sequence>
-   <xs:attribute name="id" type="rdml:idType" use="required">
+   <xs:attribute name="id" type="xs:positiveInteger" use="required">
      <xs:annotation>
        <xs:documentation>
-         The ID of this reaction - The ID can be only assigned freely if 
-         "pcrFormatType" is "free format". Otherwhise it is required to 
-         label the "id" according to the pattern give in "pcrFormatType".
-         For example if "96-well plate; A1-H12" is selected a valid "id"
-         must be in the range of "A1" to "H12".
+         The ID of this reaction
+		 
+		 Schemas :
+		    - rotor : assign IDs according to the position of the sample on the rotor (1 for the 1st sample, 2 for the 2nd, ...)
+			- plate (96/384/1536 well) : the IDs are assigned in a row-first/column-second manner. For each row, the samples are
+				numbered according to the increasing column number. At the end of a row, the numbering starts at the first column of
+				the next row. An example for this type of plate can be found below :
+			
+                      1   2   3   4   5   6   7   8   9  10  11  12
+                  ___________________________________________________
+                A |   1   2   3   4   5   6   7   8   9  10  11  12
+                B |  13  14  15  16  17  18  19  20  21  22  23  24
+                C |  25  26  27  28  28  30  31  32  33  34  35  36
+                D | ...
+				
+			
+			- multi-array plate (BioTrove) : the IDs are assigned in a row-first/column-second manner, ignoring the organisation 
+                of sub-arrays. For each row, the samples are numbered according to the increasing column number. At the end of a row, the 
+                the next row. An example for this type of plate can be found below :
+			
+                                1         |         2        |        3         |  ...
+                   --------------------------------------------------------------------	   
+                   |   |   1   2   3   4  |   5   6   7   8  |   9  10  11  12  |  ...
+                   ____________________________________________________________________
+                   | a |   1   2   3   4  |   5   6   7   8  |   9  10  11  12  |  ...
+                 A | b |  49  50  51  52  |  53  54  55  56  |  57  58  59  60  |  ...
+                   | c |  97  98  99 100  | 101 102 103 104  | 105 106 107 108  |  ...
+                   | d | 145 146 147 148  | 149 150 151 152  | 153 154 155 156  |  ...
+                   --------------------------------------------------------------------
+                   | a | 193 194 195 196  | 197 198 199 200  | 201 202 203 204  |  ...
+                 B | b | 241 242 243 244  | 245 246 247 248  | 249 250 251 252  |  ...
+                   | c |  ...             |  ...             |  ...             |  ...
+				
        </xs:documentation>
      </xs:annotation>
    </xs:attribute>
@@ -699,14 +748,11 @@
      <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Quantity - The reference quantity of this sample. This element only makes sense
-           if the "type" is "std" or "opt". If the "type" is "std" this value should give 
-           a copy number or DNA concentration. Only the use of true numbers is valid like 
+           Quantity - The reference quantity of this sample (can be used if the sample is
+		   incluced in a standard curve). Only the use of true numbers is valid like 
            1, 10, 100, 1000 or 1, 0.1, 0.01, 0.001. The use of exponents is not valid like
            1, 2, 3, 4 or -1, -2, -3, -4 beause it will not be interpreted as 10E1, 10E2, 
-           10E3, 10E4 or 10E-1, 10E-2, 10E-3. If the "type" is "opt" this value should give 
-           the DNA concentration in nanogram / microliter. Use quantUnit to indicate the 
-           unit.
+           10E3, 10E4 or 10E-1, 10E-2, 10E-3.         
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -718,18 +764,18 @@
        </xs:annotation>
      </xs:element>
      <xs:element name="cdnaSynthesisMethod" type="rdml:cdnaSynthesisMethodType" minOccurs="0"/>
-     <xs:element name="templateRNAQuantity" type="xs:double" minOccurs="0">
+     <xs:element name="templateRNAQuantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The equivalent RNA concentration in nanogram / microliter in the reaction mix.
+           The final equivalent RNA concentration in the reaction mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
      <xs:element name="templateRNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
-     <xs:element name="templateDNAQuantity" type="xs:double" minOccurs="0">
+     <xs:element name="templateDNAQuantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The template DNA concetration in nanogram / microliter in the reaction mix.
+           The final template DNA concentration in the reaction mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -854,10 +900,10 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="dyeId" type="xs:string" minOccurs="0">
+     <xs:element name="dyeId" type="rdml:idReferencesType">
        <xs:annotation>
          <xs:documentation>
-           Description of the dye.
+           DyeID - A reference to a dye.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -1027,6 +1073,7 @@
        <xs:element name="id" type="rdml:rdmlIdType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="experimenter" type="rdml:experimenterType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="documentation" type="rdml:documentationType" maxOccurs="unbounded" minOccurs="0"/>
+       <xs:element name="dye" type="rdml:dyeType" maxOccurs="unbounded" minOccurs="0"/>
        <xs:element name="sample" type="rdml:sampleType" maxOccurs="unbounded" minOccurs="0">
          <xs:unique name="sampleXRefId">
            <xs:annotation>
@@ -1144,6 +1191,15 @@
    </xs:keyref>
    <xs:key name="documentationKey">
      <xs:selector xpath="./rdml:documentation" />
+     <xs:field xpath="@id" />
+   </xs:key>
+
+   <xs:keyref name="dyeKeyRef" refer="rdml:dyeKey">
+     <xs:selector xpath="./rdml:target/rdml:dyeId" />
+     <xs:field xpath="@id" />
+   </xs:keyref>
+   <xs:key name="dyeKey">
+     <xs:selector xpath="./rdml:dye" />
      <xs:field xpath="@id" />
    </xs:key>
 
