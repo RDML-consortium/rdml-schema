@@ -119,14 +119,6 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           Quantity - A calculated quantity based on the quantity provided with
-           the standard samples.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
      <xs:element name="excl" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -886,6 +878,7 @@
      <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="type" type="rdml:targetTypeType"/>
+     <xs:element name="amplificationEfficiencyMethod" type="xs:string" minOccurs="0"/>
      <xs:element name="amplificationEfficiency" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
