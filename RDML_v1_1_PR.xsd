@@ -589,7 +589,7 @@
        <xs:unique name="adpCycUnique">
          <xs:annotation>
            <xs:documentation>
-             The cycle (sic) within the amplification curve datapoints) (dap) must be unique.
+             The cycle (cyc) within the amplification curve datapoints) (adp) must be unique.
            </xs:documentation>
          </xs:annotation>
          <xs:selector xpath="./rdml:adp" />
@@ -713,7 +713,7 @@
        <xs:unique name="dataTarID">
          <xs:annotation>
            <xs:documentation>
-             The target ID (tarID) within the data element must be unique.
+             The target ID (tar->@id) within the data element must be unique.
            </xs:documentation>
          </xs:annotation>
          <xs:selector xpath="./rdml:data/rdml:tar" />
@@ -733,7 +733,7 @@
        are performed on the same material), and biological replicates should 
        contain different names (the nucleic acids derived from the different 
        biological replicates are not the same). Serial dilutions in a standard
-       curve have a different name.
+       curve must have a different name.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -1063,14 +1063,14 @@
        <xs:element name="dateMade" type="xs:dateTime" minOccurs="0">
          <xs:annotation>
            <xs:documentation>
-             The date or timestamp of the creation of this file.
+             The date and time stamp of the creation of this file.
            </xs:documentation>
          </xs:annotation>
        </xs:element>
        <xs:element name="dateUpdated" type="xs:dateTime" minOccurs="0">
          <xs:annotation>
            <xs:documentation>
-             The date or timestamp of the last update of this file.
+             The date and time stamp of the last update of this file.
            </xs:documentation>
          </xs:annotation>
        </xs:element>
