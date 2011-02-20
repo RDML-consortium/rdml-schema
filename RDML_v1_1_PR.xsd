@@ -381,6 +381,19 @@
    </xs:restriction>
  </xs:simpleType>
 
+ <xs:simpleType name="labelFormatType">
+   <xs:annotation>
+     <xs:documentation>
+       Label used for pcrFormat.
+     </xs:documentation>
+   </xs:annotation>
+   <xs:restriction base="xs:string">
+     <xs:enumeration value="ABC"/>
+     <xs:enumeration value="123"/>
+     <xs:enumeration value="BioTrove"/>
+   </xs:restriction>
+ </xs:simpleType>
+
  <xs:complexType name="lidOpenType">
    <xs:annotation>
      <xs:documentation>
@@ -475,28 +488,32 @@
        
        Values for common formats are:
        
-       Format            |    rows    |   columns
-       ---------------------------------------------
-       single-well       |     1      |      1   
-       48-well plate     |     6      |      8
-       96-well plate     |     8      |     12
-       384-well plate    |    16      |     24
-       1536-well plate	 |    32      |     48
-       3072-well array   |    32      |     96
-       5184-well chip    |    72      |     72
-       32-well rotor     |    32      |      1
-       72-well rotor     |    72      |      1
-       100-well rotor    |   100      |      1
-       free format       |    -1      |      1
+       Format            |    rows    |   columns   |  rowLabel  | columnLabel
+       --------------------------------------------------------------------------
+       single-well       |     1      |      1      |    123     |     123
+       48-well plate     |     6      |      8      |    ABC     |     123
+       96-well plate     |     8      |     12      |    ABC     |     123
+       384-well plate    |    16      |     24      |    ABC     |     123
+       1536-well plate	 |    32      |     48      |    ABC     |     123
+       3072-well array   |    32      |     96      |  BioTrove  |  BioTrove
+       5184-well chip    |    72      |     72      |    ABC     |     123
+       32-well rotor     |    32      |      1      |    123     |     123
+       72-well rotor     |    72      |      1      |    123     |     123
+       100-well rotor    |   100      |      1      |    123     |     123
+       free format       |    -1      |      1      |    123     |     123
        
        If rows are -1 then the software should not try to reconstruct a plate and 
        just display all react data in list (1 column) form.
+       
+       If columns is 1 then the software should not display a column label.
           
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
      <xs:element name="rows" type="xs:int"/>
      <xs:element name="columns" type="xs:int"/>
+     <xs:element name="rowLabel" type="rdml:labelFormatType"/>
+     <xs:element name="columnLabel" type="rdml:labelFormatType"/>
    </xs:sequence>
  </xs:complexType>
 
