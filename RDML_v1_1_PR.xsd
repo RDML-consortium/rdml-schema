@@ -390,7 +390,7 @@
    <xs:restriction base="xs:string">
      <xs:enumeration value="ABC"/>
      <xs:enumeration value="123"/>
-     <xs:enumeration value="BioTrove"/>
+     <xs:enumeration value="A1a1"/>
    </xs:restriction>
  </xs:simpleType>
 
@@ -495,7 +495,7 @@
        96-well plate     |     8      |     12      |    ABC     |     123
        384-well plate    |    16      |     24      |    ABC     |     123
        1536-well plate   |    32      |     48      |    ABC     |     123
-       3072-well array   |    32      |     96      |  BioTrove  |  BioTrove
+       3072-well array   |    32      |     96      |   A1a1     |    A1a1
        5184-well chip    |    72      |     72      |    ABC     |     123
        32-well rotor     |    32      |      1      |    123     |     123
        72-well rotor     |    72      |      1      |    123     |     123
