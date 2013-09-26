@@ -167,7 +167,18 @@
      <xs:element name="bgFluor" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Background fluorescence - The measured background fluorescence.
+           Background fluorescence y-intercept - The y-intercept of the 
+           baseline based on measured background fluorescence.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="bgFluorSlp" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Background fluorescence slope - The slope of the baseline 
+           based on measured background fluorescence. The element should 
+           be absent to indicate a slope of 0.0; If this element is 
+           present without the bgFluor element it should be ignored.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
