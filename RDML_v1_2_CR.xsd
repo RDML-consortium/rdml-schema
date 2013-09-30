@@ -467,6 +467,15 @@
      <xs:enumeration value="meltcurve"/>
    </xs:restriction>
  </xs:simpleType>
+ 
+ <xs:simpleType name="nucleotideType">
+   <xs:restriction base="xs:string">
+     <xs:enumeration value="DNA"/>
+     <xs:enumeration value="genomic DNA"/>
+     <xs:enumeration value="cDNA"/>
+     <xs:enumeration value="RNA"/>
+   </xs:restriction>
+ </xs:simpleType>
 
  <xs:complexType name="oligoType">
    <xs:sequence>
@@ -797,11 +806,13 @@
      <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Quantity - The reference quantity of this sample (can be used if the sample is
-		   incluced in a standard curve). Only the use of true numbers is valid like 
-           1, 10, 100, 1000 or 1, 0.1, 0.01, 0.001. The use of exponents is not valid like
-           1, 2, 3, 4 or -1, -2, -3, -4 beause it will not be interpreted as 10E1, 10E2, 
-           10E3, 10E4 or 10E-1, 10E-2, 10E-3.         
+           Quantity - The reference quantity of this sample. It should be only used if the 
+           sample is part of a standard curve. The provided value will be used to quantify 
+           unknown samples in absolute quantification assays.  
+           Only the use of true numbers is valid like 1, 10, 100, 1000 or 1, 0.1, 0.01, 
+           0.001. The use of exponents is not valid like 1, 2, 3, 4 or -1, -2, -3, -4 
+           because it will not be interpreted as 10E1, 10E2, 10E3, 10E4 or 10E-1, 10E-2, 
+           10E-3, 10E-4.         
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -813,22 +824,7 @@
        </xs:annotation>
      </xs:element>
      <xs:element name="cdnaSynthesisMethod" type="rdml:cdnaSynthesisMethodType" minOccurs="0"/>
-     <xs:element name="templateRNAQuantity" type="rdml:quantityType" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           The final equivalent RNA concentration in the reaction.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
-     <xs:element name="templateRNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
-     <xs:element name="templateDNAQuantity" type="rdml:quantityType" minOccurs="0">
-       <xs:annotation>
-         <xs:documentation>
-           The final template DNA concentration in the reaction.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
-     <xs:element name="templateDNAQuality" type="rdml:templateQualityType" minOccurs="0"/>
+     <xs:element name="templateQuantity" type="rdml:templateQuantityType" minOccurs="0" />
    </xs:sequence>
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
@@ -1033,22 +1029,17 @@
    </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="templateQualityType">
+ <xs:complexType name="templateQuantityType">
    <xs:sequence>
-     <xs:element name="method" type="xs:string">
+     <xs:element name="conc" type="xs:float">
        <xs:annotation>
          <xs:documentation>
-           Method used to measure quality, for example "Spectroscopy, OD 260/280".
+           Concentration of the template in nanogram per microliter in the 
+           final reaction mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="result" type="xs:float">
-       <xs:annotation>
-         <xs:documentation>
-           The measured value.
-         </xs:documentation>
-       </xs:annotation>
-     </xs:element>
+     <xs:element name="nucleotide" type="rdml:nucleotideType"/>
    </xs:sequence>
  </xs:complexType>
 
