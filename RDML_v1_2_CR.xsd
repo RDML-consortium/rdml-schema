@@ -923,7 +923,7 @@
    <xs:annotation>
      <xs:documentation>
        A target is a defined PCR reaction. PCR reactions for the same gene 
-       which differ in primer sequences are considered different samples. 
+       which differ in primer sequences are considered different targets. 
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
