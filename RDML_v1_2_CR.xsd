@@ -229,7 +229,8 @@
      <xs:element name="fluor" type="xs:float">
        <xs:annotation>
          <xs:documentation>
-           Fluorescence - The fluorescence intensity measured.
+           Fluorescence - The fluorescence intensity measured without any correction.
+           The fluorescence intensity must not be baseline corrected.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -253,7 +254,8 @@
      <xs:element name="fluor" type="xs:float">
        <xs:annotation>
          <xs:documentation>
-           Fluorescence - The fluorescence intensity measured.
+           Fluorescence - The fluorescence intensity measured without any correction.
+           The fluorescence intensity must not be baseline corrected.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
