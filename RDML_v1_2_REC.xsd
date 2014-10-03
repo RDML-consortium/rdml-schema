@@ -946,8 +946,8 @@
      <xs:element name="amplificationEfficiencySE" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The standard error of the slope of the standard curve or the derived 
-           efficiency value provided in "amplificationEfficiency" should be given.
+           The standard error of the value provided in "amplificationEfficiency" 
+           should be given.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
