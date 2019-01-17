@@ -1,0 +1,62 @@
+Changes between RDML v1.0 to v 1.1
+
+- dataType
+
+    The element quantity was removed. The quantity is a result of calculation and 
+    should be given in the result section which will be implemented in a future 
+    version. 
+    
+    If a cq-value is not available, the cq value must be set to -1.0.
+    
+- dyeType
+    
+    A new top level element for the dye. Each target must in v1.1 refer to a dye to 
+    allow reconstruction of a plate in multiplex situations (could lead to undefined 
+    situations in v1.0).
+    
+- pcrFormatType
+    
+    The pcrTormatType was redesigned. In v1.0 every new plate setup required an 
+    update of the schema. In v1.1 the plate setup is defined by providing columns 
+    and rows in combination with a numbering schema for the wells (left to right, 
+    rows first). The wells are numbered by position and not by use, the 
+    letter+number id is dropped.
+    
+- primingMethodType
+    
+    The method "other" was added to the list.
+    
+- reactType
+    
+    The id format was changed to int. All reactions should be numbered by position 
+    as described (left to right, rows first). The wells are numbered by position and 
+    not by use, the letter+number id is dropped.
+    
+- sampleType
+    
+    The elements templateRNAQuantity and templateDNAQuantity were changed from 
+    double to quantityType giving more freedom in providing quantity information.
+    
+- sampleTypeType
+    
+    The sample types ntp (no target present), nrt (minusRT) and pos (positive 
+    control) were added.
+    
+- targetType
+    
+    A descriptive string amplificationEfficiencyMethod was introduced for the user 
+    to provide information on the method of amplification efficiency calculation.
+    
+    The element dyeId must refer to a dye element by id (it was an optional string 
+    in v1.0). 
+    
+- thirdPartyExtensionsType
+    
+    The element allowing third party extensions was removed. The extensions should 
+    be provided as seperate files and included into the RDML archive before 
+    compression. See Introduction_to_RDML.txt for details.
+    
+- rdml
+    
+    The element dye was added which is used by the target elements.    
+        

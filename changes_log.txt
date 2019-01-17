@@ -1,3 +1,9 @@
+Changes:
+
+- Added the documentation files, the license and a readme.
+
+- No changes on any schema.
+
 Changes in revision 71:
 
 - fixed unique tar @Id in data

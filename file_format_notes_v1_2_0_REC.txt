@@ -1,0 +1,24 @@
+﻿RDML File Compression and File extensions
+
+The xml file containing the RDML compliant data should be stored in a
+file named rdml_data.xml. This file should be compressed using pkzip
+compatible compression into an archive. The archive can have any name,
+but instead of having the extension .zip it should have the extension
+.rdml (preferably) or .rdm.
+
+Software should be able to read compressed .rdml or .rdm files as well
+as uncompressed .xml files.
+
+The XML file should be encoded in UTF-8, \n should be used as newline 
+character and a point "." as decimal separator.
+
+XML is used to be human readable. All id strings in the file should 
+be unique short names as provided by the user. Do not use random 
+generated strings as ids, as they should be displayed to the user for 
+example to identify different samples.
+
+If several strings have to be combined, use a ";" semicolon as separator.
+This is required for example in the "excl" element in the "data" section 
+of the "react": The different reasons for exclusion have to be separated 
+by ";" semicolons. Do not set the value to "false" if it should be 
+included, just do not set this element.

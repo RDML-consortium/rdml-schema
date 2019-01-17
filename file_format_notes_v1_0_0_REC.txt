@@ -1,0 +1,11 @@
+﻿RDML File Compression and File extensions
+
+The xml file containing the RDML compliant data should be stored in a
+file named rdml_data.xml. This file should be compressed using pkzip
+compatible compression into an archive. The archive can have any name,
+but instead of having the extension .zip it should have the extension
+.rdml (preferably) or .rdm.
+Archives ending in .rdml or .rdm should only contain one file, the file
+rdml_data.xml.
+Software should be able to read compressed .rdml or .rdm files as well
+as uncompressed .xml files.

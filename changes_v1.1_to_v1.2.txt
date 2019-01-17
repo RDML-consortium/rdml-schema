@@ -1,0 +1,97 @@
+Changes between RDML v1.1 to v 1.2
+
+- sampleType
+
+    annotation: New element occurring 0 to unlimited times
+      This element has two subelements, property and value, both strings.
+      It should be used to annotate the properties of samples.
+      
+    templateRNAQuality: Element was removed
+      Use the annotation element instead. 
+      
+    templateDNAQuality: Element was removed
+      Use the annotation element instead.
+      
+    templateRNAQuantity: Element was removed
+      Use the templateQuantity element instead.
+      
+    templateDNAQuantity: Element was removed
+      Use the templateQuantity element instead.
+
+    templateQuantity: New optional element
+      Use this element to define the nucleotide concentration of
+      the template.
+      It has the subelements:
+        - conc
+          Concentration of the template in nanogram per microliter in the 
+          final reaction mix.
+        - nucleotide
+          The type of nucleotide used as template. Possible values are genomic DNA,
+          cDNA, DNA, RNA.
+         
+- targetType
+       
+    amplificationEfficiencySE: New optional element
+      The standard error of the value provided in "amplificationEfficiency" 
+      should be given.
+      
+- dataType
+
+    bgFluorSlp: New optional element
+      This element contains the slope of the baseline function.
+      Background fluorescence slope - The slope of the baseline trend 
+      based on the estimated background fluorescence. The element should 
+      be absent to indicate a slope of 0.0; If this element is present 
+      without the bgFluor element it should be ignored.
+
+
+-----------------------------------------------------------------------------
+Clarifications of existing elements without functional changes:
+
+- sampleType
+
+    quantity:
+      Quantity - The reference quantity of this sample. It should be only used if the 
+      sample is part of a standard curve. The provided value will be used to quantify 
+      unknown samples in absolute quantification assays.  
+      Only the use of true numbers is valid like 1, 10, 100, 1000 or 1, 0.1, 0.01, 
+      0.001. The use of exponents is not valid like 1, 2, 3, 4 or -1, -2, -3, -4 
+      because it will not be interpreted as 10E1, 10E2, 10E3, 10E4 or 10E-1, 10E-2, 
+      10E-3, 10E-4.         
+
+- targetType
+      A target is a defined PCR reaction. PCR reactions for the same gene 
+      which differ in primer sequences are considered different targets.
+
+- dataType      
+      
+    bgFluor: Clarification of the documentation:
+      Background fluorescence - The y-intercept of the baseline trend 
+      based on the estimated background fluorescence.
+
+
+    excl: Clarification of the documentation:
+      Excluded - If present, this entry should not be evaluated. Do not set 
+      this element to false if this entry is valid, leave the entire 
+      element out instead. 
+      It may contain a string with reason for exclusion. Several reasons 
+      for exclusion should be separated by semicolons ";".
+      
+    dpAmpCurveType / dpMeltingCurveType // fluor: Clarification of the documentation:
+      Fluorescence - The fluorescence intensity measured without any correction.
+      The fluorescence intensity must not be baseline corrected.
+      
+
+- idType
+
+    Clarification of the documentation: A ID must be at least one 
+    character and unique. The id should be a human readable short name as 
+    it was provided by the user.
+
+- targetType
+
+    amplificationEfficiency: Clarification of the documentation:
+      Amplification efficiency should be given as the fold-increase of DNA 
+      per cycle (the base of the exponential function), for example 1.95 
+      for 95% efficiency.
+      
