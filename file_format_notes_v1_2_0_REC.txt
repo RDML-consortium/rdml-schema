@@ -1,4 +1,4 @@
-﻿RDML File Compression and File extensions
+RDML File Compression and File extensions
 
 The xml file containing the RDML compliant data should be stored in a
 file named rdml_data.xml. This file should be compressed using pkzip
