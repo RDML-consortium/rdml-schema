@@ -1,0 +1,78 @@
+Changes between RDML v1.2 to v 1.3
+
+Digital PCR measure a high number of partitions. To not overload 
+the XML file with this data, separate table files are used that 
+are stored in a partitions folder within the RDML zip file. The 
+counts of the partitions must be stored in the XML file within
+the coressponding data elements.
+
+The table files must use tabs (\t) as column separators and dots 
+(.) as decimal seperators. A line must contain the data of one 
+partion. For each fluoescence two colums are created. One with 
+the endpoint fluorescence value and a second with its score. The
+score can be:
+  u - undefined or not yet scored
+  p - positive
+  n - negative
+  e - excluded (should be ignored)
+The file must have a header line with the target ids matching the 
+fluorescence value.
+
+The first lines could look like:
+GAPDH\tGAPDH\tHBV\tHBV\n
+3412.32\tp\t121.89\tn\n
+239.23\tn\t3459.27\tp\n
+
+-----------------------------------------------------------------------------
+Changes on the RDML XML strucures:
+
+- reactType
+
+    data: The element can now occure 0(!) to unlimited times.
+      As data can also be in the partitions element, there can be 
+      RDML files without data elements.
+
+    partitions: The new element can occure 0 to one times.
+      Reactions split up in partitions as in digital PCR must 
+      report data using this elements.
+
+      
+- partitionsType
+
+    volume: New element
+      This element contains the average volume of one partition 
+      in nanoliter (nl).
+
+    endPtTable: New optional element
+      This element contains the filename string. See fist section.
+
+    data (partitionDataType): The element can occure 1 to unlimited times.
+      As data can also be in the partitions element, there can be
+      RDML files without data elements.
+
+
+- partitionDataType
+
+    tar: New element
+      The target id.
+
+    pos: New element
+      Positive partitions - The number of positive partitions.
+
+    neg: New element
+      Negative partitions - The number of negative partitions.
+
+    undef: New optional element
+      Undefined partitions - The number of undefined or not yet scored partitions.
+
+    excl: New optional element
+      Excluded partitions - The number of excluded partitions.
+
+    conc: New optional element
+      Concentration - The concentration in copies per microliter reaction mix.
+
+-----------------------------------------------------------------------------
+Clarifications of existing elements without functional changes:
+
+
+      
