@@ -1398,6 +1398,10 @@
      <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:data/rdml:tar" />
      <xs:field xpath="@id" />
    </xs:keyref>
+   <xs:keyref name="targetIdKeyRef2" refer="rdml:targetIdKey">
+     <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:partitions/rdml:data/rdml:tar" />
+     <xs:field xpath="@id" />
+   </xs:keyref>
    <xs:key name="targetIdKey">
      <xs:selector xpath="./rdml:target" />
      <xs:field xpath="@id" />
