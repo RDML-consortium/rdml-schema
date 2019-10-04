@@ -185,7 +185,7 @@
      <xs:element name="quantFluor" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Quantification flourescence - The fluorescence value corresponding to the treshold line.
+           Quantification flourescence - The fluorescence value corresponding to the threshold line.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -208,7 +208,7 @@
  <xs:complexType name="dpAmpCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the frequent occurence of this element, names are kept short.
+       Due to the frequent occurrence of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
@@ -240,7 +240,7 @@
  <xs:complexType name="dpMeltingCurveType">
    <xs:annotation>
      <xs:documentation>
-       Due to the frequent occurence of this element, names are kept short.
+       Due to the frequent occurrence of this element, names are kept short.
      </xs:documentation>
    </xs:annotation>
    <xs:sequence>
