@@ -8,7 +8,7 @@
    <xs:documentation>
      The MIT License
 
-     Copyright (c) 2008-2013 the RDML-consortium
+     Copyright (c) 2008-2020 the RDML-consortium
 
      Permission is hereby granted, free of charge, to any person obtaining a copy
      of this software and associated documentation files (the "Software"), to deal
@@ -262,6 +262,26 @@
    </xs:sequence>
  </xs:complexType>
 
+ <xs:simpleType name="dyeChemistryType">
+   <xs:annotation>
+     <xs:documentation>
+       The monitoring chemistry of this dye.
+     </xs:documentation>
+   </xs:annotation>
+   <xs:restriction base="xs:string">
+     <xs:enumeration value="DNA binding dye"/>
+     <xs:enumeration value="Molecular Beacon"/>
+     <xs:enumeration value="hybridization probe"/>
+     <xs:enumeration value="Light-Up probe"/>
+     <xs:enumeration value="hydrolysis probe"/>
+     <xs:enumeration value="NuPCR system"/>
+     <xs:enumeration value="LUX primer"/>
+     <xs:enumeration value="Scorpion probe"/>
+     <xs:enumeration value="Sunrise probe"/>
+     <xs:enumeration value="QZyme probe"/>
+   </xs:restriction>
+ </xs:simpleType>
+
  <xs:complexType name="dyeType">
    <xs:annotation>
      <xs:documentation>
@@ -270,6 +290,7 @@
    </xs:annotation>
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
+     <xs:element name="dyeChemistry" type="rdml:dyeChemistryType" minOccurs="0"/>
    </xs:sequence>
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
@@ -892,6 +913,22 @@
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
 
+ <xs:complexType name="sampleTargetType">
+   <xs:annotation>
+     <xs:documentation>
+       The same sample could have the sampleTypeType pos for one target and ntp
+       for a different target. Therefor several entries are allowed and can be
+       linked to a target. If no target is given, only one entry should be
+       present valid for all targets in this run.
+     </xs:documentation>
+   </xs:annotation>
+   <xs:simpleContent>
+     <xs:extension base="rdml:sampleTypeType">
+       <xs:attribute name="targetId" type="rdml:idType"/>
+     </xs:extension>
+   </xs:simpleContent>
+ </xs:complexType>
+
  <xs:complexType name="sampleType">
    <xs:annotation>
      <xs:documentation>
@@ -909,7 +946,7 @@
      <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="annotation" type="rdml:annotationType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="type" type="rdml:sampleTypeType" default="unkn"/>
+     <xs:element name="type" type="rdml:sampleTargetType" default="unkn" maxOccurs="unbounded"/>
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -1060,6 +1097,13 @@
          <xs:documentation>
            The standard error of the value provided in "amplificationEfficiency" 
            should be given.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="meltingTemperature" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The melting temperature in degrees Celsius of this target.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -1401,6 +1445,10 @@
    <xs:keyref name="targetIdKeyRef2" refer="rdml:targetIdKey">
      <xs:selector xpath="./rdml:experiment/rdml:run/rdml:react/rdml:partitions/rdml:data/rdml:tar" />
      <xs:field xpath="@id" />
+   </xs:keyref>
+   <xs:keyref name="targetIdKeyRef3" refer="rdml:targetIdKey">
+     <xs:selector xpath="./rdml:sample/rdml:type" />
+     <xs:field xpath="@targetId" />
    </xs:keyref>
    <xs:key name="targetIdKey">
      <xs:selector xpath="./rdml:target" />

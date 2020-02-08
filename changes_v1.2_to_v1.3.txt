@@ -71,6 +71,35 @@ Changes on the RDML XML structures:
     conc: New optional element
       Concentration - The concentration in copies per microliter reaction mix.
 
+
+- targetType
+
+    meltingTemperature: New optional element
+      The melting temperature in degrees Celsius of this target.
+
+- dyeType
+
+    dyeChemistry: New optional element
+      The monitoring chemistry of this dye. The options are:
+           - DNA binding dye
+           - Molecular Beacon
+           - hybridization probe
+           - Light-Up probe
+           - hydrolysis probe
+           - NuPCR system
+           - LUX primer
+           - Scorpion probe
+           - Sunrise probe
+           - QZyme probe
+
+- sampleType
+
+    type: Uses new element sampleTargetType and can occur 1 to unlimited times.
+      The same sample could have the sampleTypeType pos for one target and ntp
+      for a different target. Therefor several entries are allowed and can be
+      linked to a target. If no target is given, only one entry should be
+      present valid for all targets in this run.
+
 -----------------------------------------------------------------------------
 Clarifications of existing elements without functional changes:
 
