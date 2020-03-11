@@ -72,25 +72,39 @@ Changes on the RDML XML structures:
       Concentration - The concentration in copies per microliter reaction mix.
 
 
+- dataType
+
+    ampEffMet: New element
+      Amplification efficiency method as free text.
+
+    ampEff: New element
+      Amplification efficiency should as the fold-increase of DNA per
+      cycle (the base of the exponential function), for example 1.95
+      for 95% efficiency.
+
+    ampEffSE: New element
+      The standard error of the value provided in "ampEff" should be given.
+
+    meltTemp: New element
+      The melting temperature in degrees Celsius of the amplified amplicon.
+
+
 - targetType
 
     meltingTemperature: New optional element
-      The melting temperature in degrees Celsius of this target.
+      The melting temperature in degrees Celsius of the amplified amplicon.
 
 - dyeType
 
     dyeChemistry: New optional element
       The monitoring chemistry of this dye. The options are:
-           - DNA binding dye
-           - Molecular Beacon
-           - hybridization probe
-           - Light-Up probe
-           - hydrolysis probe
-           - NuPCR system
-           - LUX primer
-           - Scorpion probe
-           - Sunrise probe
-           - QZyme probe
+        - non-saturating DNA binding dye (SYBR Green I)
+        - saturating DNA binding dye (Eva Green, LC Green Plus, BEBO, Syto9)
+        - hybridization probe (Molecular Beacon, Light-Up probes, BHQnova Probe)
+        - hydrolysis probe (TaqMan, NuPCR)
+        - labelled forward primer (LUX primer)
+        - labelled reverse primer (Scorpion probe, Sunrise probe, Amplifluor Universal detection system)
+        - DNA-zyme probe (QZyme probe)
 
 - sampleType
 

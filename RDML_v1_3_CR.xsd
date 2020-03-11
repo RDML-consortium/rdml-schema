@@ -132,6 +132,37 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="ampEffMet" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Amplification efficiency method is a given as free text.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="ampEff" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Amplification efficiency should be given as the fold-increase
+           of DNA per cycle (the base of the exponential function),
+           for example 1.95 for 95% efficiency.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="ampEffSE" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The standard error of the value provided in "ampEff"
+           should be given.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="meltTemp" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The melting temperature in degrees Celsius of the amplified amplicon.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="excl" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -185,7 +216,7 @@
      <xs:element name="quantFluor" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Quantification flourescence - The fluorescence value corresponding to the threshold line.
+           Quantification fluorescence - The fluorescence value corresponding to the threshold line.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -265,20 +296,24 @@
  <xs:simpleType name="dyeChemistryType">
    <xs:annotation>
      <xs:documentation>
-       The monitoring chemistry of this dye.
+       The monitoring chemistry of this dye. The options are:
+         - non-saturating DNA binding dye (SYBR Green I)
+         - saturating DNA binding dye (Eva Green, LC Green Plus, BEBO, Syto9)
+         - hybridization probe (Molecular Beacon, Light-Up probes, BHQnova Probe)
+         - hydrolysis probe (TaqMan, NuPCR)
+         - labelled forward primer (LUX primer)
+         - labelled reverse primer (Scorpion probe, Sunrise probe, Amplifluor Universal detection system)
+         - DNA-zyme probe (QZyme probe)
      </xs:documentation>
    </xs:annotation>
    <xs:restriction base="xs:string">
-     <xs:enumeration value="DNA binding dye"/>
-     <xs:enumeration value="Molecular Beacon"/>
+     <xs:enumeration value="non-saturating DNA binding dye"/>
+     <xs:enumeration value="saturating DNA binding dye"/>
      <xs:enumeration value="hybridization probe"/>
-     <xs:enumeration value="Light-Up probe"/>
      <xs:enumeration value="hydrolysis probe"/>
-     <xs:enumeration value="NuPCR system"/>
-     <xs:enumeration value="LUX primer"/>
-     <xs:enumeration value="Scorpion probe"/>
-     <xs:enumeration value="Sunrise probe"/>
-     <xs:enumeration value="QZyme probe"/>
+     <xs:enumeration value="labelled forward primer"/>
+     <xs:enumeration value="labelled reverse primer"/>
+     <xs:enumeration value="DNA-zyme probe"/>
    </xs:restriction>
  </xs:simpleType>
 
@@ -1103,7 +1138,7 @@
      <xs:element name="meltingTemperature" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The melting temperature in degrees Celsius of this target.
+           The melting temperature in degrees Celsius of the amplified amplicon.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
