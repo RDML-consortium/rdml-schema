@@ -88,6 +88,11 @@ Changes on the RDML XML structures:
     meltTemp: New element
       The melting temperature in degrees Celsius of the amplified amplicon.
 
+    note: New element
+      A note string similar to "excl". It may contain a string with notes
+      to the data element which do not lead to exclusion of the entry.
+      Several reasons for exclusion should be seperated by semicolons ";".
+
 
 - targetType
 
