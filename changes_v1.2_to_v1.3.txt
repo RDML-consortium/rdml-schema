@@ -77,13 +77,29 @@ Changes on the RDML XML structures:
     ampEffMet: New element
       Amplification efficiency method as free text.
 
+    N0: New element
+      Pronounced N-zero. Target quantity or starting concentration per
+      reaction, expressed in calculated arbitrary fluorescence units.
+      Negative values are used to express following conditions:
+      Not Available: -1.0
+
     ampEff: New element
       Amplification efficiency should as the fold-increase of DNA per
       cycle (the base of the exponential function), for example 1.95
       for 95% efficiency.
+      If absent, the ideal efficiency of 2.0 should be used for
+      calculations.
 
     ampEffSE: New element
       The standard error of the value provided in "ampEff" should be given.
+
+    corrF: New element
+      The correction factor indicating the fraction of the expected
+      product in all products. A factor of 0.25 indicates that the
+      expected product contributes only a quarter to the observed
+      results.
+      If absent, the ideal correction factor of 1.0 should be used
+      for calculations.
 
     meltTemp: New element
       The melting temperature in degrees Celsius of the amplified amplicon.

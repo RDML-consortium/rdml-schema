@@ -132,6 +132,16 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="N0" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Pronounced N-zero. Target quantity or starting concentration per
+           reaction, expressed in calculated arbitrary fluorescence units.
+           Negative values are used to express following conditions:
+           Not Available: -1.0
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="ampEffMet" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -145,6 +155,8 @@
            Amplification efficiency should be given as the fold-increase
            of DNA per cycle (the base of the exponential function),
            for example 1.95 for 95% efficiency.
+           If absent, the ideal efficiency of 2.0 should be used for
+           calculations.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -153,6 +165,18 @@
          <xs:documentation>
            The standard error of the value provided in "ampEff"
            should be given.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="corrF" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The correction factor indicating the fraction of the expected
+           product in all products. A factor of 0.25 indicates that the
+           expected product contributes only a quarter to the observed
+           results.
+           If absent, the ideal correction factor of 1.0 should be used
+           for calculations.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
