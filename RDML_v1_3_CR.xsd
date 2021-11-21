@@ -656,6 +656,29 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="excluded" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Excluded - If present, this entry should not be evaluated. Do not set
+           this element to false if this entry is valid, leave the entire
+           element out instead.
+           This element is equivalent to the excl element in dataType.
+           It may contain a string with reason for exclusion. Several reasons
+           for exclusion should be seperated by semicolons ";".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="note" type="xs:string" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Note - Do not set this element to false if this element is not needed,
+           leave the entire element out instead.
+           It may contain a string with notes to the data element which do not
+           lead to exclusion of the entry. Several reasons for exclusion should
+           be seperated by semicolons ";".
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="pos" type="xs:int">
        <xs:annotation>
          <xs:documentation>
@@ -688,7 +711,7 @@
        <xs:annotation>
          <xs:documentation>
            Concentration - The concentration in copies per microliter reaction
-	   mix.
+           mix.
          </xs:documentation>
        </xs:annotation>
      </xs:element>

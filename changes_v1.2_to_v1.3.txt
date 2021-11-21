@@ -56,6 +56,16 @@ Changes on the RDML XML structures:
     tar: New element
       The target id.
 
+    excluded: New optional element
+      If present, the data element should be excluded. It should contain a
+      string explaining the reason for exclusion. Several reasons for
+      exclusion should be seperated by semicolons ";".
+
+    note: New optional element
+      A note string similar to "excluded". It may contain a string with notes
+      to the data element which do not lead to exclusion of the entry.
+      Several notes should be seperated by semicolons ";".
+
     pos: New element
       Positive partitions - The number of positive partitions.
 
@@ -107,7 +117,7 @@ Changes on the RDML XML structures:
     note: New element
       A note string similar to "excl". It may contain a string with notes
       to the data element which do not lead to exclusion of the entry.
-      Several reasons for exclusion should be seperated by semicolons ";".
+      Several notes should be seperated by semicolons ";".
 
 
 - targetType
