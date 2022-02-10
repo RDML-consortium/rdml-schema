@@ -180,6 +180,16 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="corrP" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The correction factor to correct for inter run differences
+           within this experiment.
+           If absent, the ideal correction factor of 1.0 should be used
+           for calculations.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="meltTemp" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -1043,7 +1053,9 @@
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           True if this sample is used as inter run calibrator.
+           True if this sample is used as inter run calibrator. A inter run calibrator is
+           an identical sample measured in different runs, in order to detect and correct
+           inter-run differences.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -1063,7 +1075,8 @@
      <xs:element name="calibratorSample" type="xs:boolean" default="false" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           True if this sample is used as calibrator sample.
+           True if this sample is used as calibrator sample. A calibrator sample is a
+           reference sample within a run to which results are rescaled.
          </xs:documentation>
        </xs:annotation>
      </xs:element>

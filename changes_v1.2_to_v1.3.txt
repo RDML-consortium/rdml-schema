@@ -111,6 +111,12 @@ Changes on the RDML XML structures:
       If absent, the ideal correction factor of 1.0 should be used
       for calculations.
 
+    corrP: New element
+      The correction factor to correct for inter run differences
+      within this experiment.
+      If absent, the ideal correction factor of 1.0 should be used
+      for calculations.
+
     meltTemp: New element
       The melting temperature in degrees Celsius of the amplified amplicon.
 
