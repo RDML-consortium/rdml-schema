@@ -117,6 +117,12 @@ Changes on the RDML XML structures:
       If absent, the ideal correction factor of 1.0 should be used
       for calculations.
 
+    corrCq: New element
+      Corrected quantification cycle - The corrected calculated fractional
+      PCR cycle used for downstream quantification.
+      Negative values are used to express following conditions:
+      Not Available: -1.0
+
     meltTemp: New element
       The melting temperature in degrees Celsius of the amplified amplicon.
 

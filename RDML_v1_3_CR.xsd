@@ -187,6 +187,18 @@
            within this experiment.
            If absent, the ideal correction factor of 1.0 should be used
            for calculations.
+           Negative values are used to express following conditions:
+           Not Available: -1.0
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="corrCq" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Corrected quantification cycle - The corrected calculated fractional
+           PCR cycle used for downstream quantification.
+           Negative values are used to express following conditions:
+           Not Available: -1.0
          </xs:documentation>
        </xs:annotation>
      </xs:element>
