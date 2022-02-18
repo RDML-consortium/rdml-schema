@@ -108,14 +108,18 @@ Changes on the RDML XML structures:
       product in all products. A factor of 0.25 indicates that the
       expected product contributes only a quarter to the observed
       results.
+      corrN0 = (N0 * corrF) / corrP
       If absent, the ideal correction factor of 1.0 should be used
       for calculations.
 
     corrP: New element
       The correction factor to correct for inter run differences
       within this experiment.
+      corrN0 = (N0 * corrF) / corrP
       If absent, the ideal correction factor of 1.0 should be used
       for calculations.
+      Negative values are used to express following conditions:
+      Not Available: -1.0
 
     corrCq: New element
       Corrected quantification cycle - The corrected calculated fractional
