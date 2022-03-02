@@ -155,11 +155,19 @@ Changes on the RDML XML structures:
 
 - sampleType
 
-    type: Uses new element sampleTargetType and can occur 1 to unlimited times.
+    type: Uses new element sampleTargetType and can occur 0 to unlimited times.
       The same sample could have the sampleTypeType pos for one target and ntp
       for a different target. Therefor several entries are allowed and can be
       linked to a target. If no target is given, only one entry should be
       present valid for all targets in this run.
+      If the element type is absent, the sample type is "unkn" (default value).
+
+    quantity: The element can occur 1 to unlimited times. It can have the target
+      as attribute targetId.
+      The same sample could have the quantityType 1000 copies per microliter for one
+      target or 1 fold for all targets. Optical calibrators work independent of
+      targets. Therefor several entries with or without target are allowed and can be
+      linked to a target.
 
 -----------------------------------------------------------------------------
 Clarifications of existing elements without functional changes:

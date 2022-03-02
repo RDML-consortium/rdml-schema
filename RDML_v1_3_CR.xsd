@@ -8,7 +8,7 @@
    <xs:documentation>
      The MIT License
 
-     Copyright (c) 2008-2020 the RDML-consortium
+     Copyright (c) 2008-2022 the RDML-consortium
 
      Permission is hereby granted, free of charge, to any person obtaining a copy
      of this software and associated documentation files (the "Software"), to deal
@@ -824,6 +824,7 @@
      <xs:element name="value" type="xs:float"/>
      <xs:element name="unit" type="rdml:quantityUnitType"/>
    </xs:sequence>
+   <xs:attribute name="targetId" type="rdml:idType"/>
  </xs:complexType>
 
  <xs:simpleType name="quantityUnitType">
@@ -1063,7 +1064,13 @@
      <xs:element name="documentation" type="rdml:idReferencesType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="xRef" type="rdml:xRefType" minOccurs="0" maxOccurs="unbounded"/>
      <xs:element name="annotation" type="rdml:annotationType" minOccurs="0" maxOccurs="unbounded"/>
-     <xs:element name="type" type="rdml:sampleTargetType" default="unkn" maxOccurs="unbounded"/>
+     <xs:element name="type" type="rdml:sampleTargetType" default="unkn" minOccurs="0" maxOccurs="unbounded">
+       <xs:annotation>
+         <xs:documentation>
+           If the element type is absent, the sample type is "unkn" (default value).
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="interRunCalibrator" type="xs:boolean" default="false" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -1073,7 +1080,7 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
-     <xs:element name="quantity" type="rdml:quantityType" minOccurs="0">
+     <xs:element name="quantity" type="rdml:quantityType" minOccurs="0" maxOccurs="unbounded">
        <xs:annotation>
          <xs:documentation>
            Quantity - The reference quantity of this sample. It should be only used if the 
@@ -1082,7 +1089,11 @@
            Only the use of true numbers is valid like 1, 10, 100, 1000 or 1, 0.1, 0.01, 
            0.001. The use of exponents is not valid like 1, 2, 3, 4 or -1, -2, -3, -4 
            because it will not be interpreted as 10E1, 10E2, 10E3, 10E4 or 10E-1, 10E-2, 
-           10E-3, 10E-4.         
+           10E-3, 10E-4.
+           The same sample could have the quantityType 1000 copies per microliter for one
+           target or 1 fold for all targets. Optical calibrators work independent of
+           targets. Therefor several entries with or without target are allowed and can be
+           linked to a target.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -1568,6 +1579,10 @@
    </xs:keyref>
    <xs:keyref name="targetIdKeyRef3" refer="rdml:targetIdKey">
      <xs:selector xpath="./rdml:sample/rdml:type" />
+     <xs:field xpath="@targetId" />
+   </xs:keyref>
+   <xs:keyref name="targetIdKeyRef4" refer="rdml:targetIdKey">
+     <xs:selector xpath="./rdml:sample/rdml:quantity" />
      <xs:field xpath="@targetId" />
    </xs:keyref>
    <xs:key name="targetIdKey">
