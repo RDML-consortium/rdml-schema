@@ -7,7 +7,7 @@ Although the Real-time PCR Data Markup Language (RDML) is a comprehensive and ad
 
 Summary
 -------
-The spreadsheet table must use UTF-8 encoding, Linux newline characters (\n) and tabs (\t) as column separators. Dot must be the decimal separator. The file ending should be tsv, but csv and txt are also acceptable. The first six columns must be Well, Sample, Sample Type, Target, Target Type and Dye. The well should be given as letter number combination like A10. The sample column provides the user provided sample names. Sample type must be one of the 3-4 letter codes: unkn - unknown sample, ntc - non template control, nac - no amplification control, std - standard sample, ntp - no target present, nrt - minusRT, pos - positive control or opt - optical calibrator sample. Samples with the same sample name in column 2 must have the same sample type in column 3. If sample types are not collected, use unkn for column 3. The target column provides the user provided target names. Target Type must be a 3 letter code toi - target of interest or ref - reference target. If target types are not collected, use toi for column 5. In dye the dye name should be given, like CYBR or the measurement frequency like 450nm. Targets with the same target name in column 4 must have the same target type in column 5 and dye in column 6. From column 7 the raw data follow. In the first row either the cycle is given as integer (amplification data) or the temperature in degree Celsius is given as floating point number (melting data). Amplification data and melting curve data need to be provided in two independent files. Below the measured raw data follow. 
+The spreadsheet table must use UTF-8 encoding, Linux newline characters (\n) and tabs (\t) as column separators. Dot must be the decimal separator. The file ending should be tsv, but csv and txt are also acceptable. The first seven columns must be Well, Sample, Sample Type, Target, Target Type, Dye and Cq or Tm. The well must be given as letter number combination like A10. The sample column provides the user provided sample names. Sample type must be one of the 3-4 letter codes: unkn - unknown sample, ntc - non template control, nac - no amplification control, std - standard sample, ntp - no target present, nrt - minusRT, pos - positive control or opt - optical calibrator sample. Samples with the same sample name in column 2 must have the same sample type in column 3. If sample types are not collected, use unkn for column 3. The target column provides the user provided target names. Target Type must be a 3 letter code toi - target of interest or ref - reference target. If target types are not collected, use toi for column 5. In dye the dye name must be given, like CYBR or the measurement frequency like 450nm. Targets with the same target name in column 4 must have the same target type in column 5 and dye in column 6. The cycle of quantification (Cq) (amplification data) or measured melting temperature value(s) of the amplicon(s) (Tm) (melting data) values can be provided in column 7, if present. The column must be present independent of the availability of Cq or Tm values. If the Cq values are not available for individual or for all rows, the cell must be empty. Reactions where the calculation of a Cq value was attempted, but failed, can be indicated with the value -1.0. From column 8 the raw data follow. In the first row either the cycle is given as integer (amplification data) or the temperature in degree Celsius is given as floating point number (melting data). Amplification data and melting curve data need to be provided in two independent files. Below the measured raw data follow. 
 IMPORTANT: The fluorescence values must be raw values as initially measured by the machine. It is essential that no baseline correction was performed on this data.
 
 License
@@ -22,11 +22,11 @@ Experience from the RDML format suggested an improved compatibility if all detai
 1.1. The files must be a plain text file. The file ending should be tsv, but csv and txt are also acceptable.
 1.2. The file must use UTF-8 encoding.
 1.3. The file must use Linux newline characters (\n).
-1.4. The file must use tabs (\t) as column separators. Tabs may not occur in any text within cells of the table. If present, they should be replaced by spaces. Text in cells therefore can not contain tabs and cells may not be enclosed in quotation marks.
-1.5. Dot must be the decimal separator. No further indicator for 1000 blocks should be used in numbers. 
+1.4. The file must use tabs (\t) as column separators. Tabs may not occur in any text within cells of the table. If present, they must be replaced by spaces. Text in cells therefore can not contain tabs and cells may not be enclosed in quotation marks.
+1.5. Dot must be the decimal separator. No further indicator for 1000 blocks must be used in numbers. 
 
 2. Columns describing the plate layout
-2.1. Well: The content of the cell in row 1, column 1 must be Well. In the rows below in column 1 the well should be given as upper case letter + number combination like A10 and resemble the labeling of plates. If qPCR machines do not use a two dimensional setup like for example rotor machines, the positions should be given only as numbers or with a preceding A. Empty wells can be left out, the numbers do not have to be free of gaps. If more than one letter is required, the same number of letters must be used in all wells.
+2.1. Well: The content of the cell in row 1, column 1 must be Well. In the rows below in column 1 the well must be given as upper case letter + number combination like A10 and resemble the labeling of plates. If qPCR machines do not use a two dimensional setup like for example rotor machines, the positions must be given only as numbers or with a preceding A. Empty wells can be left out, the numbers do not have to be free of gaps. If more than one letter is required, the same number of letters must be used in all wells.
 2.2. Sample: The content of the cell in row 1, column 2 must be Sample. In the rows below in column 2 the user provided sample names follow. The names should be human readable.
 2.3. Sample Type: The content of the cell in row 1, column 3 must be Sample Type. In the rows below in column 3 the sample type must be given as one of the 3 to 4 letter codes: 
      unkn - unknown sample
@@ -49,20 +49,22 @@ Experience from the RDML format suggested an improved compatibility if all detai
 2.7.4. Targets detecting the same gene using different primers or a different dye must use different target names.
 2.7.5. If target types are not collected, use toi for column 5.
 2.7.6. Multiplex data require a separate row for each measured color. In a multiplex reaction, the columns 1-3 are identical and the columns 4-6 must differ to reflect the different targets and dyes. 
-2.7.7. Technical replicates should use the same sample name and target name. The columns 2-6 will be identical between technical replicates.
+2.7.7. Technical replicates must use the same sample name and target name. The columns 2-6 will be identical between technical replicates.
 
-3. Columns with the fluorescence data
-3.1. The first row gives the cycle as integer (amplification data) or the temperature in degree Celsius as floating point number (melting data). For each cycle or temperature a individual column is created.
-3.2. From row 2 and column 7 the fluorescence values for the respective cycle (columns) and well/sample/target (rows) follow.
-3.3. IMPORTANT: The fluorescence values must be raw values as initially measured by the machine. It is essential that no baseline correction was performed on this data.
-3.4. Amplification data and melting curve data need to be provided in two independent files. The columns 1-6 of these two files are usually identical. 
-3.5. The decimal separator should be a dot.
-3.6. Fractional cycles or more than one measurement per cycle are not supported. The given numbers must reflect the actual cycles. If for example only every second cycle would be measured, the columns would be labeled 1, 3, 5 and so on.
+3. One column with Cq (amplification data) or Tm (melting data) values
+3.1. Amplification data requires a column with Cq: The content of the cell in row 1, column 1 must be Cq. Independent of the availability of cycle of quantification (Cq) values the column must be present in all RDES files with amplification data. In the rows below in column 1 the Cq value can be given. If the Cq values are not available for individual or for all rows, the call must be empty. Reactions where the calculation of a Cq value was attempted, but failed, can be indicated with the value -1.0.
+3.2. Melting data requires a column with Tm: The content of the cell in row 1, column 1 must be Tm. Independent of the availability of Tm values the column must be present in all RDES files with melting data. In the rows below in column 1 the measured melting temperature value(s) (Tm) of the amplicon(s) can be given. If the Tm values are not available for individual or for all rows, the cell must be empty. If more than one Tm is measured, the individual values must be joined by semicolon (;) and without any spaces (82.9;73.6;69.8).
+3.3. The decimal separator must be a dot.
+3.4. Although this column needs to be present in all RDES files with the correct label in row 1, it is not required to fill it with data.
 
-4. Examples
-4.1. Amplification Data
+4. Columns with the fluorescence data
+4.1. The first row gives the cycle as integer (amplification data) or the temperature in degree Celsius as floating point number (melting data). For each cycle or temperature a individual column is created.
+4.2. From row 2 and column 8 the fluorescence values for the respective cycle (columns) and well/sample/target (rows) follow.
+4.3. IMPORTANT: The fluorescence values must be raw values as initially measured by the machine. It is essential that no baseline correction was performed on this data.
+4.4. Amplification data and melting curve data need to be provided in two independent files. The columns 1-6 of these two files are usually identical. 
+4.5. The decimal separator must be a dot.
+4.6. Fractional cycles or more than one measurement per cycle are not supported. The given numbers must reflect the actual cycles. If for example only every second cycle would be measured, the columns would be labeled 1, 3, 5 and so on.
 
-4.2. Melting Data
 
 
 
