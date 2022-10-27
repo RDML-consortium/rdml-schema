@@ -59,7 +59,7 @@ Experience from the RDML format suggested an improved compatibility if all detai
 
 4. Columns with the fluorescence data
 4.1. The first row gives the cycle as integer (amplification data) or the temperature in degree Celsius as floating point number (melting data). For each cycle or temperature a individual column is created.
-4.2. From row 2 and column 8 the fluorescence values for the respective cycle (columns) and well/sample/target (rows) follow.
+4.2. From row 2 and column 8 the fluorescence values for the respective cycle or temperature (columns) and well/sample/target (rows) follow.
 4.3. IMPORTANT: The fluorescence values must be raw values as initially measured by the machine and should only be corrected for so-called machine background. It is essential that no correction for baseline fluorescence was performed on this data.
 4.4. Amplification data and melting curve data need to be provided in two independent files. The columns 1-6 of these two files are usually identical. 
 4.5. The decimal separator must be a dot.
