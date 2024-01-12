@@ -142,6 +142,16 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="Ncopy" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           Number of copies in a reaction based on the rule of thumb 10 copies
+           result in a Cq 35. Caclulation:
+           Ncopy = N0 * 10 * 1.9^35 / [bgFluor]
+           Not Available: -1.0
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="ampEffMet" type="xs:string" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
@@ -885,6 +895,13 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="vol" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The volume of the reaction in microliter.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="data" type="rdml:dataType" maxOccurs="unbounded" minOccurs="0">
        <xs:unique name="adpCycUnique">
          <xs:annotation>
@@ -1506,7 +1523,7 @@
          </xs:unique>
       </xs:element>
      </xs:sequence>
-   <xs:attribute name="version" type="xs:string" fixed="1.3" use="required"/>
+   <xs:attribute name="version" type="xs:string" fixed="1.4" use="required"/>
    </xs:complexType>
    <xs:keyref name="documentationKeyRef" refer="rdml:documentationKey">
      <xs:selector xpath="./rdml:sample/rdml:documentation" />

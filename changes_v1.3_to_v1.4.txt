@@ -1,0 +1,26 @@
+Changes between RDML v1.3 to v 1.4
+
+
+
+-----------------------------------------------------------------------------
+Changes on the RDML XML structures:
+
+- reactType
+
+    vol: New optional element
+      the volume of the reaction in microliter.
+
+      
+- dataType
+
+    Ncopy: New optional element
+      Number of copies in a reaction based on the rule of thumb 10 copies
+      result in a Cq 35. Caclulation:
+      Ncopy = N0 * 10 * 1.9^35 / [bgFluor]
+      Not Available: -1.0
+
+-----------------------------------------------------------------------------
+Clarifications of existing elements without functional changes:
+
+
+      

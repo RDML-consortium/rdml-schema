@@ -1,0 +1,47 @@
+RDML File Compression and File extensions
+
+The xml file containing the RDML compliant data should be stored in a
+file named rdml_data.xml. This file should be compressed using pkzip
+compatible compression into an archive. The archive can have any name,
+but instead of having the extension .zip it should have the extension
+.rdml (preferably) or .rdm.
+
+Software should be able to read compressed .rdml or .rdm files as well
+as uncompressed .xml files.
+
+The XML file should be encoded in UTF-8, \n should be used as newline 
+character and a point "." as decimal separator.
+
+XML is used to be human readable. All id strings in the file should 
+be unique short names as provided by the user. Do not use random 
+generated strings as ids, as they should be displayed to the user for 
+example to identify different samples.
+
+If several strings have to be combined, use a ";" semicolon as separator.
+This is required for example in the "excl" element in the "data" section 
+of the "react": The different reasons for exclusion have to be separated 
+by ";" semicolons. Do not set the value to "false" if it should be 
+included, just do not set this element.
+
+Digital PCR measure a high number of partitions. To not overload 
+the XML file with this data, separate table files are used that 
+are stored in a partitions folder within the RDML zip file. The 
+counts of the partitions must be stored in the XML file within
+the corresponding data elements.
+
+The table files must use tabs (\t) as column separators and dots 
+(.) as decimal separators. A line must contain the data of one
+partition. For each fluorescence two columns are created. One with
+the endpoint fluorescence value and a second with its score. The
+score can be:
+  u - undefined or not yet scored
+  p - positive
+  n - negative
+  e - excluded (should be ignored)
+The file must have a header line with the target ids matching the 
+fluorescence value.
+
+The first lines could look like:
+GAPDH\tGAPDH\tHBV\tHBV\n
+3412.32\tp\t121.89\tn\n
+239.23\tn\t3459.27\tp\n
