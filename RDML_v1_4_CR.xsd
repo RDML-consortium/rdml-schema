@@ -145,9 +145,7 @@
      <xs:element name="Ncopy" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           Number of copies in a reaction based on the rule of thumb 10 copies
-           result in a Cq 35. Caclulation:
-           Ncopy = N0 * 10 * 1.9^35 / [bgFluor]
+           Abslute number of copies in a reaction.
            Not Available: -1.0
          </xs:documentation>
        </xs:annotation>
@@ -395,6 +393,25 @@
    <xs:sequence>
      <xs:element name="description" type="xs:string" minOccurs="0"/>
      <xs:element name="dyeChemistry" type="rdml:dyeChemistryType" minOccurs="0"/>
+     <xs:element name="dNTPs" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The micromolar (uMol/l) concentration of each dNTP. If concentrations differ,
+           provide the concentration of the lowest dNTP. Usually each dNTP is in
+           200 micromolar (uMol/l) concentration. If no value is provided, 200 is
+           used as default value.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+     <xs:element name="dyeConc" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The micromolar (uMol/l) concentration of the dye. For example, SYBR-Green is
+           used at 1.96 micromolar (uMol/l) concentration. If no value is provided,
+           1.96 is used as default value.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
    </xs:sequence>
    <xs:attribute name="id" type="rdml:idType" use="required"/>
  </xs:complexType>
@@ -621,6 +638,16 @@
        </xs:annotation>
      </xs:element>
      <xs:element name="sequence" type="rdml:sequenceType"/>
+     <xs:element name="oligoConc" type="xs:float" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           The nanomolar (nMol/l) concentration of the oligo. Usually each oligo
+           is used in 100-900 nanomolar (nMol/l) concentrations. If no value is
+           provided, 250 is used as default value.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
+
    </xs:sequence>
  </xs:complexType>
 
