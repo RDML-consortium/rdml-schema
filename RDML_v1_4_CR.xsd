@@ -407,8 +407,8 @@
        <xs:annotation>
          <xs:documentation>
            The micromolar (uMol/l) concentration of the dye. For example, SYBR-Green is
-           used at 1.96 micromolar (uMol/l) concentration. If no value is provided,
-           1.96 is used as default value.
+           used at 0.98 micromolar (uMol/l) concentration. If no value is provided,
+           0.98 is used as default value.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
@@ -642,7 +642,7 @@
        <xs:annotation>
          <xs:documentation>
            The nanomolar (nMol/l) concentration of the oligo. Usually each oligo
-           is used in 100-900 nanomolar (nMol/l) concentrations. If no value is
+           is used in 10-1000 nanomolar (nMol/l) concentrations. If no value is
            provided, 250 is used as default value.
          </xs:documentation>
        </xs:annotation>
