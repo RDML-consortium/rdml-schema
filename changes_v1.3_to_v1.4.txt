@@ -5,12 +5,6 @@ Changes between RDML v1.3 to v 1.4
 -----------------------------------------------------------------------------
 Changes on the RDML XML structures:
 
-- reactType
-
-    vol: New optional element
-      the volume of the reaction in microliter.
-
-      
 - dataType
 
     Ncopy: New optional element
@@ -37,6 +31,18 @@ Changes on the RDML XML structures:
        in 10-1000 nanomolar (nMol/l) concentrations. If no value is provided, 250 is
        used as default value.
 
+- reactType
+
+    vol: New optional element
+      the volume of the reaction in microliter.
+
+- sampleType
+
+    doubleStranded: New optional element
+    True if the nucleotides in this sample are at the start of the reaction double
+    stranded like genomic DNA, plasmids or restriction fragments. If the element
+    is missing or false, the nucleotides are single standed like cDNA or oligos.
+    The default value is false meaning single stranded like cDNA.
 
 -----------------------------------------------------------------------------
 Clarifications of existing elements without functional changes:

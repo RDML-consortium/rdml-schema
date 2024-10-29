@@ -1124,6 +1124,16 @@
          </xs:documentation>
        </xs:annotation>
      </xs:element>
+     <xs:element name="doubleStranded" type="xs:boolean" default="false" minOccurs="0">
+       <xs:annotation>
+         <xs:documentation>
+           True if the nucleotides in this sample are at the start of the reaction double
+           stranded like genomic DNA, plasmids or restriction fragments. If the element
+           is missing or false, the nucleotides are single standed like cDNA or oligos.
+           The default value is false meaning single stranded like cDNA.
+         </xs:documentation>
+       </xs:annotation>
+     </xs:element>
      <xs:element name="quantity" type="rdml:quantityType" minOccurs="0" maxOccurs="unbounded">
        <xs:annotation>
          <xs:documentation>
