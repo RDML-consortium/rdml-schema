@@ -20,16 +20,16 @@ Changes on the RDML XML structures:
       default value.
 
     dyeConc: New optional element
-      The micromolar (uMol/l) concentration of the dye. For example, SYBR-Green is
-      used at 0.98 micromolar (uMol/l) concentration. If no value is provided,
-      0.98 is used as default value.
+      The nanomolar (nMol/l) concentration of the dye. For example, SYBR-Green is
+      used at 98.0 nanomolar (nMol/l) concentration. If no value is provided,
+      98.0 is used as default value.
 
 - oligoType
 
-     oligoConc: New optional element
-       The nanomolar (nMol/l) concentration of the oligo. Usually each oligo is used
-       in 10-1000 nanomolar (nMol/l) concentrations. If no value is provided, 250 is
-       used as default value.
+    oligoConc: New optional element
+      The nanomolar (nMol/l) concentration of the oligo. Usually each oligo is used
+      in 10-1000 nanomolar (nMol/l) concentrations. If no value is provided, 250 is
+      used as default value.
 
 - reactType
 
@@ -39,10 +39,10 @@ Changes on the RDML XML structures:
 - sampleType
 
     doubleStranded: New optional element
-    True if the nucleotides in this sample are at the start of the reaction double
-    stranded like genomic DNA, plasmids or restriction fragments. If the element
-    is missing or false, the nucleotides are single standed like cDNA or oligos.
-    The default value is false meaning single stranded like cDNA.
+      True if the nucleotides in this sample are at the start of the reaction double
+      stranded like genomic DNA, plasmids or restriction fragments. If the element
+      is missing or false, the nucleotides are single standed like cDNA or oligos.
+      The default value is false meaning single stranded like cDNA.
 
 -----------------------------------------------------------------------------
 Clarifications of existing elements without functional changes:

@@ -406,9 +406,9 @@
      <xs:element name="dyeConc" type="xs:float" minOccurs="0">
        <xs:annotation>
          <xs:documentation>
-           The micromolar (uMol/l) concentration of the dye. For example, SYBR-Green is
-           used at 0.98 micromolar (uMol/l) concentration. If no value is provided,
-           0.98 is used as default value.
+           The nanomolar (nMol/l) concentration of the dye. For example, SYBR-Green is
+           used at 98.0 nanomolar (nMol/l) concentration. If no value is provided,
+           98.0 is used as default value.
          </xs:documentation>
        </xs:annotation>
      </xs:element>
